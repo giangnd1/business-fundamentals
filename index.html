@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Fundamentals — 100 Khái Niệm Nền Tảng</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F4EE;
+  --bg2: #EDE9E0;
+  --surface: #FFFFFF;
+  --ink: #1A1612;
+  --ink2: #3D3830;
+  --ink3: #7A7068;
+  --ink4: #B0A898;
+  --rule: #D8D2C8;
+  --accent: #C0392B;
+  --accent2: #E8C4C0;
+  --blue: #1B4F8C;
+  --blue2: #C8D8EC;
+  --green: #1E6B4A;
+  --green2: #C8E0D5;
+  --amber: #8C5A10;
+  --amber2: #F0DEB8;
+  --violet: #5A2E8C;
+  --violet2: #DDD0F0;
+  --teal: #0D6B6B;
+  --teal2: #C0E0E0;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body {
+  font-family: 'Lora', serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--rule);border-radius:2px;}
+
+/* ─── LAYOUT ─── */
+.shell { display:flex; min-height:100vh; }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width:260px; min-width:260px;
+  background: var(--ink);
+  position:fixed; top:0; left:0; bottom:0;
+  overflow-y:auto; z-index:60;
+  display:flex; flex-direction:column;
+  transition: transform .3s ease;
+}
+.sb-head {
+  padding:32px 24px 24px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.sb-eyebrow {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; letter-spacing:3px;
+  text-transform:uppercase; color:#B0A898;
+  margin-bottom:10px;
+}
+.sb-title {
+  font-family:'Syne',sans-serif;
+  font-size:20px; font-weight:800;
+  color:#F7F4EE; line-height:1.2;
+}
+.sb-title span { color:var(--accent); }
+.sb-count {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px; color:#7A7068;
+  margin-top:8px;
+}
+
+.sb-search-wrap { padding:16px 20px; border-bottom:1px solid rgba(255,255,255,.06); }
+.sb-search {
+  width:100%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:6px;
+  padding:9px 12px 9px 32px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px; color:#F7F4EE;
+  outline:none;
+  transition:border-color .2s;
+}
+.sb-search::placeholder{color:#5A5248;}
+.sb-search:focus{border-color:rgba(192,57,43,.5);}
+.sb-search-icon {
+  position:absolute; left:32px;
+  font-size:12px; opacity:.35;
+  pointer-events:none;
+  margin-top:-26px; margin-left:0;
+}
+
+.sb-nav { padding:8px 0; flex:1; }
+.sb-section-label {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px; letter-spacing:2.5px;
+  text-transform:uppercase; color:#5A5248;
+  padding:12px 20px 6px;
+}
+.sb-item {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 20px;
+  cursor:pointer;
+  font-family:'Syne',sans-serif;
+  font-size:12.5px; font-weight:500;
+  color:#8C8278;
+  transition:all .15s;
+  border-left:2px solid transparent;
+  line-height:1.3;
+}
+.sb-item:hover { color:#F7F4EE; background:rgba(255,255,255,.04); }
+.sb-item.active { color:#F7F4EE; border-left-color:var(--accent); background:rgba(192,57,43,.08); }
+.sb-item .sb-num {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; color:#5A5248; min-width:22px;
+}
+.sb-item.active .sb-num { color:var(--accent); }
+
+/* ─── MAIN ─── */
+.main { margin-left:260px; flex:1; }
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--ink);
+  padding:80px 72px 64px;
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:'BUSINESS';
+  position:absolute; right:-40px; top:20px;
+  font-family:'Syne',sans-serif; font-weight:800;
+  font-size:160px; line-height:1;
+  color:rgba(255,255,255,.03);
+  letter-spacing:-8px; user-select:none;
+  pointer-events:none;
+}
+.hero-tag {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:20px;
+  display:flex; align-items:center; gap:10px;
+}
+.hero-tag::after { content:''; width:32px; height:1px; background:var(--accent); opacity:.5; display:inline-block; }
+.hero h1 {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(38px,5vw,68px);
+  font-weight:800; line-height:1.0;
+  color:#F7F4EE; letter-spacing:-2px;
+  margin-bottom:16px;
+}
+.hero h1 em { font-style:italic; font-family:'Lora',serif; font-weight:400; color:#B0A898; }
+.hero-desc {
+  font-size:15px; line-height:1.8;
+  color:#8C8278; max-width:580px;
+  margin-bottom:48px;
+}
+.hero-pills { display:flex; gap:10px; flex-wrap:wrap; }
+.hero-pill {
+  padding:7px 16px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:100px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px; letter-spacing:1px;
+  color:#8C8278; cursor:pointer;
+  transition:all .2s; white-space:nowrap;
+}
+.hero-pill:hover,.hero-pill.active {
+  background:var(--accent); border-color:var(--accent);
+  color:#fff;
+}
+
+/* ─── CONTENT AREA ─── */
+.content { padding:0; }
+
+/* ─── CHAPTER HEADER ─── */
+.chapter-hero {
+  background:var(--surface);
+  border-bottom:2px solid var(--ink);
+  padding:48px 72px 36px;
+  position:relative;
+}
+.ch-number {
+  font-family:'Syne',sans-serif;
+  font-size:120px; font-weight:800;
+  position:absolute; right:72px; top:16px;
+  opacity:.04; line-height:1;
+  color:var(--ink); user-select:none;
+}
+.ch-tag {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:12px;
+}
+.ch-title {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,3.5vw,46px);
+  font-weight:800; line-height:1.1;
+  margin-bottom:12px; letter-spacing:-1px;
+}
+.ch-desc {
+  font-size:15px; color:var(--ink3);
+  max-width:640px; line-height:1.8;
+}
+
+/* ─── CONCEPT GRID ─── */
+.concepts-area { padding:40px 72px 80px; }
+.concepts-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:20px;
+}
+
+/* ─── CONCEPT CARD ─── */
+.concept-card {
+  background:var(--surface);
+  border:1.5px solid var(--rule);
+  border-radius:2px;
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
+  overflow:hidden;
+}
+.concept-card::before {
+  content:'';
+  position:absolute; top:0; left:0;
+  width:3px; height:100%;
+  transition:opacity .2s; opacity:0;
+}
+.concept-card:hover { border-color:var(--ink2); box-shadow:4px 4px 0 var(--rule); transform:translate(-1px,-1px); }
+.concept-card:hover::before { opacity:1; }
+
+.card-top {
+  padding:20px 22px 0;
+  display:flex; justify-content:space-between; align-items:flex-start;
+}
+.card-index {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px; color:var(--ink4);
+  letter-spacing:1px;
+}
+.card-tag {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:3px 8px; border-radius:2px;
+}
+.card-body { padding:12px 22px 20px; }
+.card-name {
+  font-family:'Syne',sans-serif;
+  font-size:17px; font-weight:700;
+  line-height:1.25; margin-bottom:8px;
+  letter-spacing:-.3px;
+}
+.card-short {
+  font-size:13px; color:var(--ink3);
+  line-height:1.65;
+}
+.card-expand {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--ink4);
+  padding:10px 22px;
+  border-top:1px solid var(--rule);
+  display:flex; align-items:center; gap:6px;
+  transition:color .15s;
+}
+.concept-card:hover .card-expand { color:var(--ink3); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(26,22,18,.7);
+  z-index:1000; align-items:center; justify-content:center;
+  padding:24px; backdrop-filter:blur(6px);
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--surface);
+  border:2px solid var(--ink);
+  border-radius:2px;
+  max-width:620px; width:100%;
+  max-height:82vh; overflow-y:auto;
+  animation:mIn .25s ease;
+}
+@keyframes mIn { from{opacity:0;transform:translateY(20px) scale(.97)} to{opacity:1;transform:none} }
+.modal-header {
+  background:var(--ink);
+  padding:28px 32px 24px;
+  position:sticky; top:0; z-index:1;
+}
+.modal-meta {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:12px;
+}
+.modal-close {
+  background:none; border:none; cursor:pointer;
+  font-size:18px; color:#8C8278;
+  width:28px; height:28px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:4px; transition:background .15s;
+}
+.modal-close:hover{background:rgba(255,255,255,.08);color:#F7F4EE;}
+.modal-index {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px; color:#5A5248; letter-spacing:2px;
+}
+.modal-tag-badge {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  padding:4px 10px; border-radius:2px;
+}
+.modal-title {
+  font-family:'Syne',sans-serif;
+  font-size:26px; font-weight:800;
+  color:#F7F4EE; line-height:1.15;
+  letter-spacing:-.5px;
+}
+.modal-body { padding:28px 32px 32px; }
+.modal-section { margin-bottom:24px; }
+.modal-section:last-child { margin-bottom:0; }
+.modal-section-label {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--accent); margin-bottom:10px;
+  display:flex; align-items:center; gap:8px;
+}
+.modal-section-label::after { content:''; flex:1; height:1px; background:var(--accent2); }
+.modal-text {
+  font-size:14.5px; line-height:1.82;
+  color:var(--ink2);
+}
+.modal-text p { margin-bottom:12px; }
+.modal-text p:last-child { margin-bottom:0; }
+.modal-text strong { color:var(--ink); font-weight:600; }
+.modal-text em { color:var(--accent); font-style:normal; }
+
+.modal-formula {
+  background:var(--bg2);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--amber);
+  padding:14px 18px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px; color:var(--amber);
+  border-radius:0 4px 4px 0;
+  margin:12px 0;
+  line-height:1.6;
+}
+
+.modal-example {
+  background:var(--bg);
+  border-radius:2px;
+  border:1px solid var(--rule);
+  padding:16px 20px;
+  font-size:14px; line-height:1.75;
+  color:var(--ink3);
+}
+.modal-example strong {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--ink4); display:block; margin-bottom:6px;
+}
+
+/* ─── NAV ARROWS ─── */
+.modal-nav {
+  display:flex; justify-content:space-between;
+  padding:16px 32px;
+  border-top:1px solid var(--rule);
+  background:var(--bg2);
+}
+.modal-nav-btn {
+  display:flex; align-items:center; gap:6px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px; letter-spacing:1px;
+  text-transform:uppercase; color:var(--ink3);
+  background:none; border:none; cursor:pointer;
+  padding:6px 0; transition:color .15s;
+}
+.modal-nav-btn:hover { color:var(--ink); }
+.modal-nav-btn:disabled { opacity:.3; cursor:default; }
+
+/* ─── CHAPTER DIVIDER ─── */
+.chapter-divider {
+  background:var(--bg2);
+  border-top:2px solid var(--ink);
+  border-bottom:1px solid var(--rule);
+  padding:24px 72px;
+  display:flex; align-items:center; gap:16px;
+}
+.cd-num {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--accent);
+  white-space:nowrap;
+}
+.cd-title {
+  font-family:'Syne',sans-serif;
+  font-size:20px; font-weight:800;
+  letter-spacing:-.3px;
+}
+.cd-icon { font-size:20px; }
+.cd-line { flex:1; height:1px; background:var(--rule); }
+
+/* ─── SEARCH RESULT COUNT ─── */
+.result-bar {
+  padding:16px 72px 0;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px; color:var(--ink4);
+  letter-spacing:.5px;
+}
+.result-bar span { color:var(--ink); font-weight:500; }
+
+/* ─── EMPTY ─── */
+.empty {
+  display:none; text-align:center;
+  padding:80px 24px;
+}
+.empty.show { display:block; }
+.empty-icon { font-size:40px; margin-bottom:16px; opacity:.4; }
+.empty h3 { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; margin-bottom:8px; }
+.empty p { font-size:14px; color:var(--ink3); }
+
+/* ─── MOBILE ─── */
+.ham {
+  display:none; position:fixed; top:16px; left:16px;
+  z-index:200; background:var(--ink); border:none;
+  border-radius:4px; padding:10px 12px;
+  font-size:16px; color:#F7F4EE; cursor:pointer;
+}
+.mob-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:50; }
+
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .ham{display:block;}
+  .mob-overlay.show{display:block;}
+  .hero,.chapter-hero,.concepts-area,.chapter-divider,.result-bar{padding-left:24px;padding-right:24px;}
+  .concepts-grid{grid-template-columns:1fr;}
+  .ch-number{display:none;}
+  .modal-body,.modal-header{padding:20px 24px;}
+  .modal-nav{padding:12px 24px;}
+}
+
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(12px);}
+  to{opacity:1;transform:none;}
+}
+.concept-card { animation: fadeUp .35s ease both; }
+</style>
+</head>
+<body>
+<button class="ham" id="ham">☰</button>
+<div class="mob-overlay" id="mobOverlay"></div>
+
+<div class="shell">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-head">
+    <div class="sb-eyebrow">Cẩm nang kinh doanh</div>
+    <div class="sb-title">Business<br><span>Fundamentals</span></div>
+    <div class="sb-count">100 khái niệm · 8 nhóm</div>
+  </div>
+
+  <div class="sb-search-wrap" style="position:relative;">
+    <span style="position:absolute;left:32px;top:26px;font-size:12px;opacity:.3;pointer-events:none;">🔍</span>
+    <input class="sb-search" id="sbSearch" placeholder="Tìm khái niệm..." autocomplete="off">
+  </div>
+
+  <nav class="sb-nav" id="sbNav">
+    <div class="sb-section-label">Nhóm khái niệm</div>
+    <div class="sb-item active" data-filter="all" onclick="filterCat('all',this)">
+      <span class="sb-num">∞</span> Tất cả 100 khái niệm
+    </div>
+    <div class="sb-item" data-filter="strategy" onclick="filterCat('strategy',this)">
+      <span class="sb-num">01</span> Chiến lược & Cạnh tranh
+    </div>
+    <div class="sb-item" data-filter="finance" onclick="filterCat('finance',this)">
+      <span class="sb-num">02</span> Tài chính Doanh nghiệp
+    </div>
+    <div class="sb-item" data-filter="marketing" onclick="filterCat('marketing',this)">
+      <span class="sb-num">03</span> Marketing & Tăng trưởng
+    </div>
+    <div class="sb-item" data-filter="operations" onclick="filterCat('operations',this)">
+      <span class="sb-num">04</span> Vận hành & Quy trình
+    </div>
+    <div class="sb-item" data-filter="people" onclick="filterCat('people',this)">
+      <span class="sb-num">05</span> Con người & Tổ chức
+    </div>
+    <div class="sb-item" data-filter="product" onclick="filterCat('product',this)">
+      <span class="sb-num">06</span> Sản phẩm & Đổi mới
+    </div>
+    <div class="sb-item" data-filter="sales" onclick="filterCat('sales',this)">
+      <span class="sb-num">07</span> Bán hàng & Khách hàng
+    </div>
+    <div class="sb-item" data-filter="leadership" onclick="filterCat('leadership',this)">
+      <span class="sb-num">08</span> Lãnh đạo & Quyết định
+    </div>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="mainContent">
+
+  <!-- HERO -->
+  <div class="hero" id="heroSection">
+    <div class="hero-tag">100 Core Concepts</div>
+    <h1>Business<br><em>Fundamentals</em></h1>
+    <p class="hero-desc">Toàn bộ kiến thức nền tảng để hiểu, xây dựng và vận hành một doanh nghiệp — từ chiến lược cạnh tranh đến tài chính, từ marketing đến lãnh đạo. 100 khái niệm được chọn lọc kỹ từ kiến thức business toàn cầu.</p>
+    <div class="hero-pills" id="heroPills">
+      <div class="hero-pill active" data-filter="all" onclick="filterCat('all',this)">Tất cả</div>
+      <div class="hero-pill" data-filter="strategy" onclick="filterCat('strategy',this)">Chiến lược</div>
+      <div class="hero-pill" data-filter="finance" onclick="filterCat('finance',this)">Tài chính</div>
+      <div class="hero-pill" data-filter="marketing" onclick="filterCat('marketing',this)">Marketing</div>
+      <div class="hero-pill" data-filter="operations" onclick="filterCat('operations',this)">Vận hành</div>
+      <div class="hero-pill" data-filter="people" onclick="filterCat('people',this)">Con người</div>
+      <div class="hero-pill" data-filter="product" onclick="filterCat('product',this)">Sản phẩm</div>
+      <div class="hero-pill" data-filter="sales" onclick="filterCat('sales',this)">Bán hàng</div>
+      <div class="hero-pill" data-filter="leadership" onclick="filterCat('leadership',this)">Lãnh đạo</div>
+    </div>
+  </div>
+
+  <div class="result-bar" id="resultBar">Hiển thị <span id="shownCount">100</span> / 100 khái niệm</div>
+  <div class="concepts-area">
+    <div class="concepts-grid" id="grid"></div>
+    <div class="empty" id="emptyState">
+      <div class="empty-icon">🔭</div>
+      <h3>Không tìm thấy</h3>
+      <p>Thử từ khóa khác nhé.</p>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-meta">
+        <span class="modal-index" id="mIndex">—</span>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div id="mTagBadge"></div>
+      <div class="modal-title" id="mTitle">—</div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-label">Định nghĩa</div>
+        <div class="modal-text" id="mDef"></div>
+      </div>
+      <div class="modal-section" id="mFormulaSection" style="display:none;">
+        <div class="modal-section-label">Công thức / Mô hình</div>
+        <div class="modal-formula" id="mFormula"></div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Tại sao quan trọng</div>
+        <div class="modal-text" id="mWhy"></div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-label">Ví dụ thực tế</div>
+        <div class="modal-example"><strong>Case Study</strong><span id="mExample"></span></div>
+      </div>
+    </div>
+    <div class="modal-nav">
+      <button class="modal-nav-btn" id="mPrev" onclick="navModal(-1)">← Trước</button>
+      <button class="modal-nav-btn" id="mNext" onclick="navModal(1)">Tiếp →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────────────────────
+const CATS = {
+  strategy:   { label:'Chiến lược', color:'#C0392B', bg:'#F8E8E8', dark:'#C0392B' },
+  finance:    { label:'Tài chính',  color:'#1B4F8C', bg:'#E8EFF8', dark:'#1B4F8C' },
+  marketing:  { label:'Marketing',  color:'#1E6B4A', bg:'#E8F5EE', dark:'#1E6B4A' },
+  operations: { label:'Vận hành',   color:'#8C5A10', bg:'#FBF1E0', dark:'#8C5A10' },
+  people:     { label:'Con người',  color:'#5A2E8C', bg:'#F1EAF8', dark:'#5A2E8C' },
+  product:    { label:'Sản phẩm',   color:'#0D6B6B', bg:'#E0F5F5', dark:'#0D6B6B' },
+  sales:      { label:'Bán hàng',   color:'#6B3A10', bg:'#F8EDE0', dark:'#6B3A10' },
+  leadership: { label:'Lãnh đạo',   color:'#2A4A2A', bg:'#E8F0E8', dark:'#2A4A2A' },
+};
+
+const DATA = [
+  // ─── STRATEGY (13) ───
+  {id:1,cat:'strategy',name:'Competitive Advantage',short:'Lợi thế giúp doanh nghiệp vượt trội đối thủ một cách bền vững.',
+    def:'<p><strong>Competitive Advantage (Lợi thế cạnh tranh)</strong> là tập hợp các điểm khác biệt giúp doanh nghiệp cung cấp giá trị vượt trội hơn đối thủ và duy trì được lợi thế đó theo thời gian.</p><p>Michael Porter xác định 3 nguồn lợi thế cơ bản: <strong>chi phí thấp hơn</strong> (cost leadership), <strong>sự khác biệt</strong> (differentiation), và <strong>tập trung ngách</strong> (focus). Lợi thế thực sự phải khó sao chép và tạo ra giá trị khách hàng sẵn sàng trả tiền.</p>',
+    why:'<p>Không có lợi thế cạnh tranh, doanh nghiệp chỉ cạnh tranh bằng giá — cuộc chiến không ai thắng. Lợi thế bền vững (sustainable competitive advantage) là nền tảng của lợi nhuận dài hạn và bảo vệ doanh nghiệp trước sự gia nhập của đối thủ mới.</p>',
+    example:'Apple duy trì lợi thế cạnh tranh qua hệ sinh thái kín (iPhone + Mac + iPad + iCloud + App Store), thương hiệu premium và thiết kế — ba nguồn lợi thế cùng lúc, cực kỳ khó sao chép tổng thể.'},
+
+  {id:2,cat:'strategy',name:'Porter\'s Five Forces',short:'Khung phân tích 5 lực lượng cạnh tranh quyết định sức hút của ngành.',
+    def:'<p>Michael Porter (1979) đề xuất mô hình 5 lực lượng quyết định mức độ cạnh tranh và lợi nhuận tiềm năng của một ngành:</p><p><strong>1. Đối thủ cạnh tranh hiện tại</strong> — cường độ cạnh tranh nội ngành. <strong>2. Nhà cung cấp</strong> — quyền mặc cả của nhà cung ứng. <strong>3. Khách hàng</strong> — quyền mặc cả của người mua. <strong>4. Sản phẩm thay thế</strong> — nguy cơ từ sản phẩm/dịch vụ thay thế. <strong>5. Người gia nhập mới</strong> — rào cản gia nhập ngành.</p>',
+    why:'<p>Ngành có 5 lực lượng mạnh (cạnh tranh cao, nhà cung cấp có quyền lực, khách hàng dễ chuyển đổi, thay thế dễ, rào cản thấp) thường có lợi nhuận thấp. Doanh nghiệp cần chọn ngành hoặc tạo vị thế làm suy yếu các lực lượng bất lợi.</p>',
+    example:'Google trong thị trường quảng cáo search: nhà cung cấp yếu (chỉ cần server), khách hàng phụ thuộc cao (không có lựa chọn tốt hơn), rào cản gia nhập khổng lồ (data + thuật toán) → lợi nhuận cực kỳ cao.'},
+
+  {id:3,cat:'strategy',name:'SWOT Analysis',short:'Phân tích điểm mạnh, điểm yếu, cơ hội và thách thức.',
+    formula:'S = Strengths · W = Weaknesses · O = Opportunities · T = Threats',
+    def:'<p><strong>SWOT</strong> là công cụ phân tích chiến lược kết hợp yếu tố nội bộ (S,W) và môi trường bên ngoài (O,T) để xây dựng chiến lược phù hợp.</p><p><strong>Strengths:</strong> nguồn lực, năng lực vượt trội. <strong>Weaknesses:</strong> hạn chế cần khắc phục. <strong>Opportunities:</strong> xu hướng thị trường có thể khai thác. <strong>Threats:</strong> rủi ro bên ngoài cần phòng ngừa.</p><p>Sau khi phân tích, xây dựng chiến lược SO (dùng S khai thác O), ST (dùng S phòng T), WO (khắc phục W để tận dụng O), WT (phòng thủ).</p>',
+    why:'<p>SWOT buộc doanh nghiệp nhìn thẳng vào cả điểm mạnh lẫn điểm yếu — rất dễ bị confirmation bias bỏ qua điểm yếu. Đây là bước đầu tiên của mọi kế hoạch chiến lược nghiêm túc.</p>',
+    example:'Netflix SWOT năm 2010: S=brand + công nghệ streaming, W=nội dung original hạn chế, O=băng thông internet tăng, T=Blockbuster + studios rút nội dung → chiến lược: đầu tư mạnh nội dung original (WO).'},
+
+  {id:4,cat:'strategy',name:'Blue Ocean Strategy',short:'Tạo thị trường mới không có cạnh tranh thay vì cạnh tranh trong đại dương đỏ.',
+    def:'<p>Kim & Mauborgne (2005): Thay vì cạnh tranh trong "đại dương đỏ" — thị trường đã bão hòa, cạnh tranh khốc liệt — hãy tạo ra "đại dương xanh" bằng cách <strong>tạo ra nhu cầu mới và khiến cạnh tranh trở nên không còn liên quan</strong>.</p><p>Công cụ: <strong>Eliminate</strong> (loại bỏ những gì ngành xem là mặc định), <strong>Reduce</strong> (giảm những gì dưới chuẩn ngành), <strong>Raise</strong> (tăng những gì ngành xem là thỏa hiệp), <strong>Create</strong> (tạo thứ ngành chưa có).</p>',
+    why:'<p>Cạnh tranh trực tiếp là zero-sum — một bên thắng, một bên thua. Blue Ocean tạo ra value innovation: giảm chi phí trong khi tăng giá trị khách hàng cùng lúc, mở ra tăng trưởng không bị giới hạn bởi kích thước thị trường hiện tại.</p>',
+    example:'Cirque du Soleil loại bỏ thú, ngôi sao riêng lẻ và giảm hài kịch (chi phí cao) nhưng tạo thêm câu chuyện nghệ thuật, nhạc, sân khấu và tăng giá vé 10 lần — thu hút khán giả hoàn toàn mới không đến xem xiếc.'},
+
+  {id:5,cat:'strategy',name:'Business Model Canvas',short:'Khung 9 ô mô tả toàn bộ mô hình kinh doanh trên một trang.',
+    formula:'VP + CS + CH + CR + RS + KA + KR + KP + CS = Business Model',
+    def:'<p>Alexander Osterwalder tạo ra công cụ giúp hình dung toàn bộ mô hình kinh doanh qua <strong>9 thành phần</strong>:</p><p><strong>Value Proposition</strong> — giá trị tạo ra cho ai. <strong>Customer Segments</strong> — phân khúc khách hàng. <strong>Channels</strong> — kênh tiếp cận. <strong>Customer Relationships</strong> — loại quan hệ. <strong>Revenue Streams</strong> — dòng doanh thu. <strong>Key Activities</strong> — hoạt động cốt lõi. <strong>Key Resources</strong> — nguồn lực quan trọng. <strong>Key Partners</strong> — đối tác chiến lược. <strong>Cost Structure</strong> — cấu trúc chi phí.</p>',
+    why:'<p>Business Model Canvas buộc đội ngũ nhìn doanh nghiệp một cách toàn diện và trực quan, tránh tư duy phân mảnh. Đặc biệt hữu ích khi khám phá mô hình mới, tái cơ cấu, hoặc đánh giá startup.</p>',
+    example:'Airbnb trên BMC: VP=lưu trú rẻ hơn + trải nghiệm địa phương, CS=du khách + chủ nhà, Channels=app+web, KR=platform+data, RS=hoa hồng 3-5% — rõ ràng tại sao mô hình này hoạt động mà không cần sở hữu bất kỳ BĐS nào.'},
+
+  {id:6,cat:'strategy',name:'Value Chain Analysis',short:'Phân tích chuỗi hoạt động tạo giá trị để tìm nguồn lợi thế cạnh tranh.',
+    def:'<p>Porter (1985) chia hoạt động doanh nghiệp thành <strong>hoạt động chính</strong> (primary: logistics đầu vào, vận hành, logistics đầu ra, marketing & bán hàng, dịch vụ sau bán) và <strong>hoạt động hỗ trợ</strong> (support: hạ tầng, HRM, R&D, procurement). Mỗi hoạt động đều đóng góp hoặc làm giảm giá trị.</p><p>Value Chain giúp xác định đâu là nơi doanh nghiệp tạo ra nhiều giá trị nhất — từ đó đầu tư đúng chỗ.</p>',
+    why:'<p>Rất nhiều doanh nghiệp đầu tư đều khắp mà không biết hoạt động nào thực sự tạo lợi thế. Value Chain Analysis giúp tập trung nguồn lực vào "link" tạo ra nhiều giá trị nhất và outsource/cắt bỏ những link không cốt lõi.</p>',
+    example:'Amazon: logistics đầu ra (Prime delivery) là hoạt động tạo nhiều giá trị nhất — đầu tư vào đây quyết liệt đến mức xây dựng hạ tầng logistics riêng, vượt qua UPS và FedEx ở một số mảng.'},
+
+  {id:7,cat:'strategy',name:'Competitive Moat',short:'Hào phòng thủ bảo vệ doanh nghiệp khỏi sự tấn công của đối thủ.',
+    def:'<p>Warren Buffett phổ biến khái niệm "economic moat" — lợi thế cạnh tranh bền vững bảo vệ lợi nhuận dài hạn. Morningstar xác định 5 nguồn moat chính:</p><p><strong>Network Effects:</strong> mạng lưới càng lớn càng có giá trị. <strong>Switching Costs:</strong> chi phí cao khi rời bỏ. <strong>Intangible Assets:</strong> thương hiệu, patent, license. <strong>Cost Advantage:</strong> chi phí thấp hơn cấu trúc. <strong>Efficient Scale:</strong> thị trường đủ nhỏ chỉ một vài công ty khai thác hiệu quả.</p>',
+    why:'<p>Doanh nghiệp không có moat là "doanh nghiệp tầm thường" — dễ bị cạnh tranh và cần đầu tư liên tục chỉ để đứng yên. Moat mạnh cho phép định giá premium, ngăn đối thủ mới và bảo vệ biên lợi nhuận.</p>',
+    example:'Visa/Mastercard: moat khổng lồ từ network effects (200 triệu điểm bán + 3 tỷ thẻ), switching cost rất cao cho cả ngân hàng lẫn merchant. Đây là lý do Buffett gọi là "toll bridge" — ai cũng phải trả.'},
+
+  {id:8,cat:'strategy',name:'Disruptive Innovation',short:'Đổi mới từ phía dưới phá vỡ thị trường hiện tại của các công ty lớn.',
+    def:'<p>Clayton Christensen (1997): Disruption xảy ra khi sản phẩm <strong>đơn giản hơn, rẻ hơn, tiện lợi hơn</strong> bắt đầu ở phân khúc thấp hoặc thị trường mới, rồi cải tiến dần đến khi chiếm thị trường chính.</p><p>Công ty lớn thường bỏ qua disruptors vì họ không phải khách hàng hiện tại. Đến khi nhận ra, đã quá muộn — disruptors đã đủ tốt cho hầu hết khách hàng.</p>',
+    why:'<p>Hiểu disruption giúp doanh nghiệp lớn không bị mù trước mối đe dọa và giúp startup chọn đúng chiến lược tấn công. Đây cũng là lý do tại sao các công ty thành công nhất thường bị disrupt bởi kẻ họ không xem là đối thủ.</p>',
+    example:'Netflix vs Blockbuster: Netflix bắt đầu bằng DVD qua bưu điện (segment thấp Blockbuster bỏ qua), cải tiến thành streaming, đến khi Blockbuster nhận ra thì đã phá sản. Đây là disruption kinh điển nhất thế kỷ 21.'},
+
+  {id:9,cat:'strategy',name:'Vertical vs Horizontal Integration',short:'Tích hợp dọc kiểm soát chuỗi cung ứng, tích hợp ngang mở rộng thị phần.',
+    def:'<p><strong>Vertical Integration</strong> là doanh nghiệp kiểm soát nhiều giai đoạn của chuỗi sản xuất/phân phối — có thể tích hợp ngược (backward: kiểm soát nhà cung cấp) hoặc xuôi (forward: kiểm soát phân phối).</p><p><strong>Horizontal Integration</strong> là mở rộng sang cùng giai đoạn sản xuất — mua lại đối thủ cạnh tranh để tăng thị phần, đạt economies of scale.</p>',
+    why:'<p>Tích hợp dọc giảm phụ thuộc vào nhà cung cấp/phân phối, bảo vệ chất lượng và biên lợi nhuận nhưng tăng vốn và độ phức tạp. Tích hợp ngang tăng quy mô nhanh nhưng có thể gặp vấn đề antitrust.</p>',
+    example:'Apple tích hợp dọc mạnh: tự thiết kế chip (M-series), hệ điều hành, phần mềm, cửa hàng — kiểm soát toàn bộ trải nghiệm người dùng và biên lợi nhuận phần cứng + dịch vụ. Tesla tự làm pin, software, bán thẳng đến khách hàng.'},
+
+  {id:10,cat:'strategy',name:'First-Mover Advantage',short:'Lợi thế của người vào thị trường trước nhưng không phải lúc nào cũng bền vững.',
+    def:'<p>First-mover advantage (FMA) là lợi ích mà công ty đầu tiên gia nhập thị trường có được: thiết lập brand recognition, lock-in khách hàng, kiểm soát tài nguyên khan hiếm, xây dựng learning curve.</p><p>Tuy nhiên, nghiên cứu cho thấy FMA không phải lúc nào cũng thắng — <strong>fast follower</strong> thường hiệu quả hơn khi học từ lỗi của người đi trước và ra mắt khi thị trường đã được khai phá.</p>',
+    why:'<p>Nhiều startup tốn quá nhiều nguồn lực "educate the market" khi là first mover, trong khi fast follower đến sau với sản phẩm tốt hơn và thắng. Hiểu rõ khi nào FMA là lợi thế thực sự và khi nào là bẫy.</p>',
+    example:'MySpace là first-mover trong social network nhưng Facebook fast follower đánh bại. Tuy nhiên Amazon (e-commerce), Google (search), và eBay (marketplace) là first-mover giữ được vị thế — nhờ network effects và continuous improvement.'},
+
+  {id:11,cat:'strategy',name:'Diversification Strategy',short:'Mở rộng sang thị trường mới và sản phẩm mới để giảm rủi ro và tăng trưởng.',
+    def:'<p>Ansoff Matrix mô tả 4 chiến lược tăng trưởng: <strong>Market Penetration</strong> (sản phẩm cũ, thị trường cũ), <strong>Market Development</strong> (sản phẩm cũ, thị trường mới), <strong>Product Development</strong> (sản phẩm mới, thị trường cũ), và <strong>Diversification</strong> (sản phẩm mới, thị trường mới — rủi ro cao nhất).</p><p>Diversification có thể là related (tận dụng năng lực hiện có) hoặc unrelated (conglomerate).</p>',
+    why:'<p>Không đa dạng hóa đúng lúc khiến doanh nghiệp phụ thuộc vào một ngành — nguy hiểm khi ngành đó bị disrupt. Nhưng đa dạng hóa quá mức làm loãng focus và năng lực cạnh tranh.</p>',
+    example:'Amazon diversification thành công: từ sách → e-commerce → AWS → Prime → Alexa → logistics. Mỗi bước tận dụng năng lực cốt lõi (infrastructure, data, customer base). GE là ví dụ ngược: đa dạng hóa quá nhiều → mất focus → suy yếu.'},
+
+  {id:12,cat:'strategy',name:'Core Competency',short:'Năng lực cốt lõi tạo ra lợi thế cạnh tranh và khó bị sao chép.',
+    def:'<p>Prahalad & Hamel (1990): Core Competency là <strong>tập hợp kỹ năng và công nghệ hợp nhất</strong> tạo ra lợi thế cạnh tranh khó bị sao chép. Để là core competency, phải đáp ứng 3 tiêu chí: (1) Cung cấp tiềm năng tiếp cận nhiều thị trường, (2) Đóng góp đáng kể vào giá trị khách hàng, (3) Khó để đối thủ sao chép.</p>',
+    why:'<p>Doanh nghiệp phải liên tục hỏi: "Core competency của chúng ta là gì và chúng ta đang đầu tư vào đó chưa?" Outsource đúng những thứ không phải core competency, tập trung mọi nguồn lực vào thứ tạo ra lợi thế thực sự.</p>',
+    example:'Sony: core competency là miniaturization (thu nhỏ hóa linh kiện điện tử) — tạo ra Walkman, PlayStation, Trinitron. Honda: engine technology — áp dụng từ xe máy, ô tô đến máy cắt cỏ và máy bay. FedEx: logistics on-time.'},
+
+  {id:13,cat:'strategy',name:'Scenario Planning',short:'Chuẩn bị cho tương lai bằng cách xây dựng nhiều kịch bản khác nhau.',
+    def:'<p>Scenario Planning là quy trình xây dựng 3-5 kịch bản tương lai khác nhau (không phải dự báo một điểm) dựa trên các biến số bất định quan trọng nhất, sau đó phát triển chiến lược linh hoạt cho mỗi kịch bản.</p><p>Shell nổi tiếng với scenario planning từ những năm 1970 — giúp họ ứng phó tốt hơn với khủng hoảng dầu mỏ 1973.</p>',
+    why:'<p>Thế giới phức tạp — dự báo một điểm hầu như luôn sai. Scenario planning giúp lãnh đạo mở rộng tư duy, tránh tunnel vision và chuẩn bị tổ chức linh hoạt trước nhiều tương lai có thể xảy ra.</p>',
+    example:'COVID-19: các công ty từng làm scenario planning về "pandemic scenario" (hiếm nhưng tồn tại trong many playbooks) ứng phó nhanh hơn nhiều. Những công ty chỉ có kịch bản lạc quan bị bất ngờ hoàn toàn.'},
+
+  // ─── FINANCE (14) ───
+  {id:14,cat:'finance',name:'Revenue & Profit',short:'Doanh thu là đầu vào, lợi nhuận là những gì thực sự còn lại.',
+    formula:'Gross Profit = Revenue − COGS · Operating Profit = GP − OpEx · Net Profit = OP − Tax − Interest',
+    def:'<p><strong>Revenue (Doanh thu)</strong> là toàn bộ tiền thu về từ bán hàng/dịch vụ trước khi trừ bất cứ chi phí nào. <strong>Gross Profit</strong> = Revenue − Chi phí hàng bán trực tiếp (COGS). <strong>Operating Profit (EBIT)</strong> = Gross Profit − Chi phí hoạt động. <strong>Net Profit</strong> = lợi nhuận thực sự sau tất cả chi phí, lãi vay và thuế.</p>',
+    why:'<p>Nhiều doanh nghiệp có doanh thu lớn nhưng không có lợi nhuận — và ngược lại. Hiểu các tầng lợi nhuận giúp xác định vấn đề ở đâu: gross margin thấp (giá vốn cao), operating margin thấp (overhead lớn), hay net margin thấp (nợ vay nhiều).</p>',
+    example:'Amazon năm 2000-2014: doanh thu tăng nhanh nhưng net profit gần bằng 0. Jeff Bezos chủ đích tái đầu tư toàn bộ để mở rộng — chiến lược đúng nhưng chỉ hiểu được khi nhìn vào từng tầng lợi nhuận, không chỉ bottom line.'},
+
+  {id:15,cat:'finance',name:'Cash Flow',short:'Tiền mặt là oxy của doanh nghiệp — lợi nhuận kế toán có thể dối, dòng tiền không dối.',
+    formula:'Free Cash Flow = Operating Cash Flow − Capital Expenditures',
+    def:'<p>Cash flow là dòng tiền thực tế vào và ra khỏi doanh nghiệp. Ba loại: <strong>Operating CF</strong> (từ hoạt động kinh doanh chính), <strong>Investing CF</strong> (mua/bán tài sản dài hạn), <strong>Financing CF</strong> (vay/trả nợ, phát hành/mua lại cổ phiếu). <strong>Free Cash Flow</strong> = tiền thực sự có thể dùng sau khi duy trì và mở rộng hoạt động.</p>',
+    why:'<p>Doanh nghiệp có thể báo cáo lợi nhuận kế toán nhưng hết tiền mặt — đây là lý do phá sản thực sự của hầu hết doanh nghiệp. "Profit is an opinion, cash is a fact." Warren Buffett định giá doanh nghiệp dựa trên FCF, không phải earnings.</p>',
+    example:'Enron: báo cáo lợi nhuận hàng tỷ đô nhưng operating cash flow âm — dấu hiệu sớm nhất của fraud. Investor nào kiểm tra cash flow statement đã thấy bất thường trước khi scandal vỡ ra.'},
+
+  {id:16,cat:'finance',name:'Unit Economics',short:'Lợi nhuận và chi phí trên một đơn vị sản phẩm/khách hàng — nền tảng của scalability.',
+    formula:'Unit Margin = Price − Variable Cost · LTV/CAC ratio > 3 là healthy',
+    def:'<p>Unit Economics phân tích hiệu quả kinh tế <strong>ở cấp độ một đơn vị</strong> (một khách hàng, một giao dịch, một sản phẩm). Hai chỉ số quan trọng nhất: <strong>CAC</strong> (Customer Acquisition Cost — chi phí để có một khách hàng) và <strong>LTV</strong> (Lifetime Value — tổng giá trị một khách hàng mang lại trong suốt vòng đời).</p>',
+    why:'<p>Nhiều startup có revenue tăng nhanh nhưng unit economics âm — mỗi khách hàng thêm là mỗi đồng lỗ thêm. Scaling doanh nghiệp như vậy chỉ nhân rộng lỗ. Unit economics phải dương trước khi scale.</p>',
+    example:'Uber những năm đầu: CAC rất cao (khuyến mãi mạnh), LTV thấp (cạnh tranh giá với Lyft) → unit economics âm. Họ scale trên vốn đầu tư, không phải trên mô hình kinh doanh bền vững — mất nhiều năm mới đạt unit economics tích cực.'},
+
+  {id:17,cat:'finance',name:'Gross Margin',short:'Tỷ lệ lợi nhuận gộp — thước đo hiệu quả cốt lõi của mô hình kinh doanh.',
+    formula:'Gross Margin % = (Revenue − COGS) ÷ Revenue × 100%',
+    def:'<p>Gross Margin là phần trăm doanh thu còn lại sau khi trừ chi phí trực tiếp sản xuất hàng hóa/dịch vụ (COGS). Đây là "trần" của lợi nhuận — tất cả chi phí khác (marketing, R&D, G&A) phải được trả từ gross margin.</p><p>Gross margin cao = mô hình kinh doanh tốt. Thấp = cạnh tranh khốc liệt hoặc sản phẩm commodity.</p>',
+    why:'<p>Gross margin quyết định không gian để đầu tư vào tăng trưởng. Software: 70-90% GM → có thể đầu tư mạnh R&D và Sales. Grocery retail: 20-25% GM → rất ít không gian để sai. Cao hay thấp phụ thuộc ngành nhưng phải hiểu rõ ngành mình.</p>',
+    example:'Apple GM ~40%, Microsoft ~70%, Amazon AWS ~30% nhưng tăng nhanh. So sánh: Walmart ~24%, airlines ~10-15%. Software business model có gross margin cao nhất vì gần như không có COGS cho mỗi user thêm.'},
+
+  {id:18,cat:'finance',name:'EBITDA',short:'Lợi nhuận trước lãi, thuế, khấu hao — proxy cho dòng tiền hoạt động.',
+    formula:'EBITDA = Net Income + Interest + Taxes + Depreciation + Amortization',
+    def:'<p>EBITDA loại bỏ các yếu tố tài chính (lãi vay), thuế, và kế toán (khấu hao) để đánh giá hiệu quả hoạt động thuần túy của doanh nghiệp. Thường dùng để so sánh cross-company và làm cơ sở định giá (EV/EBITDA multiple).</p>',
+    why:'<p>EBITDA giúp so sánh doanh nghiệp có cấu trúc vốn khác nhau (nợ nhiều vs ít) và ở các quốc gia thuế khác nhau. Tuy nhiên, Warren Buffett và Charlie Munger phê phán EBITDA vì bỏ qua capex — đặc biệt nguy hiểm với ngành có capex cao.</p>',
+    example:'PE firm khi mua LBO thường dùng EV/EBITDA để định giá vì phản ánh khả năng trả nợ. Ngành SaaS thường dùng "Rule of 40" — revenue growth% + EBITDA margin% ≥ 40 là healthy business.'},
+
+  {id:19,cat:'finance',name:'Burn Rate & Runway',short:'Tốc độ đốt tiền và thời gian tồn tại trước khi hết vốn.',
+    formula:'Runway (months) = Cash Balance ÷ Net Burn Rate per month',
+    def:'<p><strong>Burn Rate</strong> là lượng tiền mặt ròng doanh nghiệp tiêu mỗi tháng (gross burn = tổng chi, net burn = chi − thu). <strong>Runway</strong> là số tháng hoạt động được với số tiền hiện có trước khi cạn kiệt.</p><p>Đây là chỉ số sống còn của startup — phải luôn biết runway hiện tại và gây quỹ ít nhất 6-9 tháng trước khi hết tiền.</p>',
+    why:'<p>Startup chết vì hết tiền, không phải vì ý tưởng xấu. Hiểu burn rate giúp founder điều phối tăng trưởng với kỷ luật tài chính, biết khi nào cần gây quỹ và khi nào cần "default to alive" (cắt chi phí để tự sống).</p>',
+    example:'2022 startup downturn: nhiều startup burn rate cao, runway chỉ 12-18 tháng khi VC funding sụt giảm. Stripe, Klarna phải cắt nhân sự lớn để extend runway. Các startup có runway 24+ tháng sống sót và thậm chí mở rộng trong giai đoạn này.'},
+
+  {id:20,cat:'finance',name:'Valuation Methods',short:'Các phương pháp định giá doanh nghiệp từ DCF đến comparable multiples.',
+    def:'<p>3 phương pháp định giá chính: (1) <strong>DCF (Discounted Cash Flow)</strong> — tính present value của tất cả free cash flow tương lai, chiết khấu theo WACC. Chính xác lý thuyết nhưng rất nhạy cảm với giả định. (2) <strong>Comparable Company Analysis</strong> — dùng EV/EBITDA, P/E, P/S ratio của công ty tương tự. (3) <strong>Precedent Transactions</strong> — giá M&A các deal tương tự đã xảy ra.</p>',
+    why:'<p>Định giá là nghệ thuật + khoa học. DCF dễ bị "garbage in, garbage out" nếu giả định sai. Market multiples phụ thuộc sentiment thị trường. Kết hợp cả ba phương pháp cho góc nhìn toàn diện hơn.</p>',
+    example:'WeWork được định giá 47 tỷ USD năm 2019 dựa trên "community-adjusted EBITDA" — chỉ số tự chế loại bỏ hầu hết chi phí thực. DCF và comparable analysis (với real estate companies) cho thấy giá trị thực ~6-10 tỷ. IPO sụp đổ, chứng minh định giá phi thực tế.'},
+
+  {id:21,cat:'finance',name:'Working Capital',short:'Vốn lưu động quản lý tài sản ngắn hạn và thanh khoản hàng ngày.',
+    formula:'Working Capital = Current Assets − Current Liabilities · CCC = DIO + DSO − DPO',
+    def:'<p><strong>Working Capital</strong> là sự chênh lệch giữa tài sản ngắn hạn (tiền, hàng tồn kho, khoản phải thu) và nợ ngắn hạn (khoản phải trả, vay ngắn hạn). <strong>Cash Conversion Cycle (CCC)</strong> đo thời gian từ lúc bỏ tiền ra đến lúc thu về.</p><p>DIO = ngày tồn kho, DSO = ngày thu nợ, DPO = ngày trả nợ nhà cung cấp.</p>',
+    why:'<p>Doanh nghiệp có thể profitable nhưng thiếu thanh khoản nếu working capital bị "mắc kẹt" trong tồn kho hoặc khoản phải thu. Amazon có CCC âm (thu tiền trước, trả nhà cung cấp sau) — nghĩa là khách hàng tài trợ cho hoạt động của họ.</p>',
+    example:'Amazon CCC âm ~24 ngày: khách hàng trả ngay khi mua, Amazon trả nhà cung cấp sau 45-60 ngày, vòng quay tồn kho nhanh → luôn có cash float khổng lồ để đầu tư. Đây là lợi thế tài chính ít người để ý.'},
+
+  {id:22,cat:'finance',name:'Return on Investment (ROI)',short:'Tỷ lệ lợi nhuận trên vốn đầu tư — đo hiệu quả sử dụng vốn.',
+    formula:'ROI = (Net Profit ÷ Cost of Investment) × 100% · ROIC = NOPAT ÷ Invested Capital',
+    def:'<p><strong>ROI</strong> đo lường lợi nhuận tương đối so với vốn bỏ ra. Các biến thể: <strong>ROE</strong> (Return on Equity — hiệu quả vốn cổ đông), <strong>ROIC</strong> (Return on Invested Capital — hiệu quả tổng vốn đầu tư), <strong>ROCE</strong> (Return on Capital Employed).</p><p>ROIC > WACC (cost of capital) = doanh nghiệp tạo ra giá trị. ROIC < WACC = phá hủy giá trị dù có lợi nhuận kế toán.</p>',
+    why:'<p>Nhiều doanh nghiệp có lợi nhuận nhưng ROIC thấp hơn cost of capital — nghĩa là cổ đông tốt hơn nên đầu tư vào chỗ khác. High ROIC + ability to reinvest at high ROIC là công thức tạo ra compounding value lớn nhất.</p>',
+    example:'Dominos Pizza ROIC ~200%+ vì mô hình franchise nặng asset-light. Họ không sở hữu pizza stores mà nhận royalty và bán nguyên liệu → rất ít vốn cần thiết để vận hành, ROIC khổng lồ.'},
+
+  {id:23,cat:'finance',name:'Leverage & Capital Structure',short:'Đòn bẩy tài chính khuếch đại cả lợi nhuận lẫn rủi ro.',
+    formula:'Debt-to-Equity = Total Debt ÷ Total Equity · Interest Coverage = EBIT ÷ Interest Expense',
+    def:'<p><strong>Financial Leverage</strong> là sử dụng nợ vay để tăng lợi nhuận trên vốn chủ sở hữu. <strong>Capital Structure</strong> là tỷ lệ giữa nợ và vốn chủ sở hữu tài trợ cho tài sản doanh nghiệp. Lý thuyết Modigliani-Miller: cấu trúc vốn tối ưu cân bằng lợi ích tax shield của nợ với chi phí kiệt sức tài chính (financial distress).</p>',
+    why:'<p>Đòn bẩy cao = lợi nhuận cao hơn khi kinh doanh tốt, nhưng rủi ro phá sản cao hơn khi kinh doanh xấu. 2008-2009: nhiều ngân hàng leverage 30:1 — khi tài sản mất 3-4% giá trị, toàn bộ vốn chủ sở hữu bị xóa.</p>',
+    example:'Lehman Brothers 2008: leverage ratio 30:1, khi mortgage assets sụt giá nhẹ → mất khả năng thanh toán → phá sản ngày 15/9/2008, trigger khủng hoảng tài chính toàn cầu. Đây là bài học về "too much leverage kills."'},
+
+  {id:24,cat:'finance',name:'Break-Even Analysis',short:'Điểm hòa vốn — doanh thu tối thiểu để không lỗ.',
+    formula:'Break-Even Point = Fixed Costs ÷ (Price per Unit − Variable Cost per Unit)',
+    def:'<p>Break-Even Point (BEP) là mức doanh thu/sản lượng mà tại đó tổng doanh thu = tổng chi phí (không lãi không lỗ). Trên BEP, mỗi đơn vị thêm tạo ra lợi nhuận bằng contribution margin. Dưới BEP, doanh nghiệp thua lỗ.</p><p><strong>Contribution Margin</strong> = Price − Variable Cost = phần mỗi đơn vị đóng góp để bù đắp fixed cost.</p>',
+    why:'<p>Break-even analysis buộc rõ ràng về cấu trúc chi phí và khả năng tồn tại của doanh nghiệp. Cũng giúp ra quyết định: nên tăng giá, cắt fixed cost, hay cần bao nhiêu doanh thu để sống sót qua giai đoạn khó.</p>',
+    example:'Restaurant với fixed cost 100 triệu/tháng (thuê + nhân sự), contribution margin 40% → cần 250 triệu/tháng doanh thu để hòa vốn. Nếu doanh thu trung bình 8 triệu/ngày, cần 31 ngày × 8 triệu = 248 triệu → sát ngưỡng, rất nguy hiểm.'},
+
+  {id:25,cat:'finance',name:'Pricing Strategy',short:'Chiến lược định giá quyết định revenue, margin và vị thế cạnh tranh.',
+    def:'<p>Các phương pháp định giá chính: <strong>Cost-Plus</strong> (giá vốn + margin cố định — đơn giản nhưng bỏ qua thị trường), <strong>Value-Based</strong> (dựa trên giá trị khách hàng sẵn sàng trả — tốt nhất cho differentiated products), <strong>Competitive</strong> (theo giá đối thủ — nguy hiểm trong commodity markets), <strong>Penetration</strong> (giá thấp để chiếm thị phần nhanh), <strong>Skimming</strong> (giá cao ban đầu, giảm dần).</p>',
+    why:'<p>Pricing là đòn bẩy lợi nhuận mạnh nhất: tăng giá 1% thường tăng lợi nhuận 10-12% (McKinsey). Hầu hết doanh nghiệp underpricing vì sợ mất khách, trong khi customer willingness to pay thường cao hơn nghĩ.</p>',
+    example:'Netflix: value-based pricing — tăng giá nhiều lần mà subscriber vẫn tăng vì giá trị nhận được (content library) tăng nhanh hơn giá. Apple: price skimming — iPhone mới giá cao nhất, giảm dần theo thời gian để tiếp cận nhiều segment hơn.'},
+
+  {id:26,cat:'finance',name:'Financial Forecasting',short:'Dự báo tài chính để lập kế hoạch, gây vốn và ra quyết định.',
+    def:'<p>Financial Forecasting xây dựng mô hình dự báo P&L, Balance Sheet và Cash Flow trong tương lai dựa trên assumptions về tăng trưởng, margin, capex. Thường dự báo 3 kịch bản: base, bull, bear.</p><p>Ba phương pháp chính: <strong>Top-down</strong> (từ TAM xuống market share), <strong>Bottom-up</strong> (từ unit economics nhân lên), và <strong>Regression/Historical</strong> (dựa trên trend lịch sử).</p>',
+    why:'<p>Forecast sai thực tế nhưng quá trình xây dựng forecast buộc rõ ràng về assumptions và drivers của business. "The forecast is always wrong, but forecasting is invaluable." Cũng là công cụ giao tiếp với investor, board và team.</p>',
+    example:'Startup gây Series A: investor yêu cầu financial model 3 năm. Model bottom-up (số khách hàng × ARPU × retention) chuyên nghiệp hơn top-down ("thị trường 10 tỷ, chúng tôi chiếm 1% = 100 triệu"). Founder nào hiểu model của mình có lợi thế trong đàm phán.'},
+
+  {id:27,cat:'finance',name:'Equity vs Debt Financing',short:'Hai con đường huy động vốn với những đánh đổi khác nhau.',
+    def:'<p><strong>Equity Financing</strong>: bán cổ phần để nhận vốn — không phải trả nợ, không tạo áp lực dòng tiền, nhưng dilute ownership và chia sẻ kiểm soát. <strong>Debt Financing</strong>: vay tiền — giữ toàn bộ ownership, tax-deductible interest, nhưng tạo obligation trả gốc lãi, hạn chế linh hoạt tài chính.</p>',
+    why:'<p>Không có câu trả lời chung. Startup không có dòng tiền ổn định → equity. Doanh nghiệp trưởng thành có CF ổn định → có thể dùng debt để tăng ROE. Asset-heavy business (BĐS, manufacturing) dùng debt nhiều hơn asset-light (software, consulting).</p>',
+    example:'Elon Musk mua Twitter 2022: 44 tỷ USD, trong đó ~13 tỷ debt từ banks. Debt service ~1 tỷ USD/năm trong khi Twitter EBITDA âm → áp lực tài chính cực kỳ lớn, buộc cắt giảm mạnh để generate cash.'},
+
+  // ─── MARKETING (12) ───
+  {id:28,cat:'marketing',name:'Market Segmentation',short:'Chia thị trường thành các nhóm đồng nhất để phục vụ hiệu quả hơn.',
+    def:'<p>Market Segmentation là chia tổng thị trường thành các phân khúc nhỏ hơn có đặc điểm và nhu cầu tương đồng. 4 loại segmentation chính: <strong>Demographic</strong> (tuổi, giới tính, thu nhập), <strong>Geographic</strong> (vị trí địa lý), <strong>Psychographic</strong> (lối sống, giá trị, nhân cách), <strong>Behavioral</strong> (hành vi mua, usage rate, loyalty).</p>',
+    why:'<p>Không thể phục vụ tất cả mọi người tốt như nhau. Segmentation giúp tập trung nguồn lực vào phân khúc có giá trị cao nhất và tạo ra messaging phù hợp, tăng hiệu quả marketing đáng kể.</p>',
+    example:'Starbucks segmentation: Psychographic (willing to pay premium cho trải nghiệm) + Behavioral (frequent coffee drinkers, "third place" seekers) — không cố phục vụ người chỉ muốn cà phê rẻ. Kết quả: khách hàng trung thành, margin cao.'},
+
+  {id:29,cat:'marketing',name:'Customer Lifetime Value (LTV)',short:'Tổng giá trị một khách hàng mang lại trong suốt vòng đời quan hệ.',
+    formula:'LTV = ARPU × Gross Margin % × (1 ÷ Churn Rate) · hoặc LTV = Avg Purchase Value × Purchase Frequency × Customer Lifespan',
+    def:'<p>LTV (hoặc CLV — Customer Lifetime Value) là tổng lợi nhuận ròng doanh nghiệp kỳ vọng nhận được từ một khách hàng trong toàn bộ thời gian họ là khách hàng. Churn rate càng thấp, LTV càng cao.</p>',
+    why:'<p>LTV quyết định bạn có thể chi bao nhiêu để có được một khách hàng (CAC). LTV/CAC ≥ 3 là healthy theo SaaS benchmark. Tăng LTV qua retention và upsell có tác động lớn hơn nhiều so với chỉ tăng số khách hàng mới.</p>',
+    example:'Amazon Prime: LTV của Prime member ~$2,500/năm vs non-Prime ~$700/năm. Amazon chi rất nhiều cho Prime benefits vì biết LTV đủ để justify. Đây là lý do họ không bao giờ ngại đầu tư vào Prime.'},
+
+  {id:30,cat:'marketing',name:'Customer Acquisition Cost (CAC)',short:'Chi phí để có được một khách hàng mới — kiểm soát để tăng trưởng bền vững.',
+    formula:'CAC = Total Sales & Marketing Spend ÷ Number of New Customers Acquired',
+    def:'<p>CAC là tổng chi phí marketing và bán hàng chia cho số khách hàng mới có được trong cùng kỳ. Bao gồm: quảng cáo, lương sales & marketing, công cụ, sự kiện, và overhead liên quan.</p><p>CAC Payback Period = CAC ÷ (Monthly Revenue per customer × Gross Margin) — thời gian thu hồi vốn mỗi khách hàng.</p>',
+    why:'<p>Doanh nghiệp không biết CAC thì không biết có đang kiếm tiền hay không. CAC tăng theo thời gian (kênh bão hòa, cạnh tranh cao hơn) trong khi LTV thường không tăng tương ứng — cảnh báo cần đổi mới kênh acquisition.</p>',
+    example:'DoorDash IPO: CAC rất cao vì phải dùng promo/discount để acquire và giữ khách. Unit economics âm trong nhiều năm. Đây là pattern phổ biến trong "winner-take-all" market: chấp nhận burn CAC cao để chiếm market share trước khi đạt scale.'},
+
+  {id:31,cat:'marketing',name:'Brand Positioning',short:'Vị thế thương hiệu trong tâm trí khách hàng so với đối thủ cạnh tranh.',
+    def:'<p>Brand Positioning là cách thương hiệu chiếm một vị trí đặc biệt và có ý nghĩa trong tâm trí target customer so với các lựa chọn cạnh tranh. Dựa trên 3 yếu tố: <strong>Target Customer</strong> (phục vụ ai), <strong>Category</strong> (chơi trong ngành nào), <strong>Differentiation</strong> (khác biệt thế nào).</p><p>Positioning Statement: "Dành cho [target], [brand] là [category] duy nhất cung cấp [benefit] vì [reason to believe]."</p>',
+    why:'<p>Không có positioning rõ ràng, thương hiệu trở nên mờ nhạt trong một thị trường đông đúc. Positioning sắc nét giúp đơn giản hóa tất cả quyết định marketing, creative và product.</p>',
+    example:'Volvo positioning: "Xe an toàn nhất thế giới" — đơn giản, rõ ràng, nhất quán 50+ năm. Mọi quyết định sản phẩm đều hướng về safety. Kết quả: khi nghĩ đến "safe car", đại đa số nghĩ đến Volvo ngay lập tức.'},
+
+  {id:32,cat:'marketing',name:'Growth Hacking',short:'Tăng trưởng nhanh qua thử nghiệm liên tục và tận dụng viral loops.',
+    def:'<p>Growth Hacking (Sean Ellis, 2010) là mindset và bộ kỹ thuật tập trung vào growth với nguồn lực hạn chế, thường thông qua A/B testing, viral mechanics, product-led growth, và tối ưu hóa funnel liên tục.</p><p>Pirate Metrics (AARRR): <strong>Acquisition</strong> → <strong>Activation</strong> → <strong>Retention</strong> → <strong>Revenue</strong> → <strong>Referral</strong>.</p>',
+    why:'<p>Startup không thể outspend big company trong traditional marketing. Growth hacking tìm kiếm leverage không đối xứng — viral loops, product virality, SEO, community — để tăng trưởng nhanh với chi phí thấp.</p>',
+    example:'Dropbox: referral program (get 500MB free for inviting friends) → grew from 100k to 4M users in 15 months without ads. Hotmail: "Sent from Hotmail — Get your free email" trong mỗi email → 1M users trong 6 tháng. Classic viral loops.'},
+
+  {id:33,cat:'marketing',name:'Content Marketing & SEO',short:'Thu hút và giữ chân khách hàng qua nội dung có giá trị thực sự.',
+    def:'<p>Content Marketing là tạo ra và phân phối nội dung có giá trị, liên quan và nhất quán để thu hút và giữ chân audience xác định rõ ràng — với mục tiêu cuối cùng là drive profitable customer action.</p><p><strong>SEO (Search Engine Optimization)</strong>: tối ưu để nội dung xuất hiện khi người dùng tìm kiếm — organic search là kênh CAC thấp nhất và bền vững nhất theo thời gian.</p>',
+    why:'<p>Paid ads: dừng chi = dừng traffic. Content + SEO: đầu tư một lần, traffic compound theo thời gian. HubSpot, Moz, Ahrefs đều xây dựng empire từ content marketing → chứng minh đây là moat thực sự trong digital age.</p>',
+    example:'HubSpot: toàn bộ growth strategy là inbound marketing (họ tự coined thuật ngữ này). Blog, templates, free tools, certifications → thu hút hàng triệu SMB monthly → convert thành CRM customers. CAC thấp hơn gấp nhiều lần so với outbound.'},
+
+  {id:34,cat:'marketing',name:'Product-Market Fit',short:'Sản phẩm đáp ứng đúng nhu cầu thị trường — điểm bước ngoặt của mọi startup.',
+    def:'<p>Marc Andreessen định nghĩa PMF là "being in a good market with a product that can satisfy that market." Dấu hiệu PMF: <strong>retention curve flatten</strong> (không còn churn dốc), <strong>NPS cao</strong>, khách hàng giới thiệu tự nhiên, <strong>Sean Ellis Test</strong>: >40% người dùng nói sẽ "very disappointed" nếu sản phẩm biến mất.</p>',
+    why:'<p>Trước PMF: mọi thứ đều khó — retention kém, word-of-mouth yếu, churn cao. Scale trước PMF = nhân rộng vấn đề. Sau PMF: growth tự nhiên hơn, unit economics cải thiện. Nhiệm vụ số 1 của early-stage startup là TÌM PMF, không phải scale.</p>',
+    example:'Slack: ban đầu là tool nội bộ của công ty game Tiny Speck. Khi game thất bại, họ pivot sang sell Slack tool. Retention curve flat từ tuần đầu → rõ ràng PMF. Ra mắt 2013, 8,000 users ngày đầu, IPO 2019 với 7 tỷ USD valuation.'},
+
+  {id:35,cat:'marketing',name:'The Funnel',short:'Hành trình khách hàng từ nhận biết đến mua hàng và trở thành advocate.',
+    def:'<p>Marketing/Sales Funnel mô tả hành trình khách hàng qua các giai đoạn: <strong>Awareness</strong> (biết đến) → <strong>Interest</strong> (quan tâm) → <strong>Consideration</strong> (cân nhắc) → <strong>Intent</strong> (có ý định) → <strong>Evaluation</strong> (đánh giá) → <strong>Purchase</strong> (mua) → <strong>Retention</strong> (giữ lại) → <strong>Advocacy</strong> (giới thiệu).</p>',
+    why:'<p>Funnel giúp xác định "leak" — giai đoạn nào mất nhiều người nhất. Fix leak lớn nhất thay vì đổ thêm traffic vào top. Tối ưu funnel từ bottom lên thường hiệu quả hơn vì người gần cuối funnel có intent cao nhất.</p>',
+    example:'E-commerce funnel: 1000 visitors → 200 view product (20%) → 50 add to cart (5%) → 15 checkout (1.5%) → 10 complete purchase (1%). Tăng checkout rate từ 1.5% lên 3% (fix UX) = tăng revenue 100% mà không tăng ad spend.'},
+
+  {id:36,cat:'marketing',name:'Brand Equity',short:'Giá trị thương hiệu vô hình tạo ra premium pricing và customer loyalty.',
+    def:'<p>Brand Equity là giá trị gia tăng mà một thương hiệu tốt mang lại cho sản phẩm/dịch vụ so với phiên bản không thương hiệu tương đương. David Aaker định nghĩa gồm: <strong>Brand Awareness</strong>, <strong>Brand Associations</strong>, <strong>Perceived Quality</strong>, <strong>Brand Loyalty</strong>.</p>',
+    why:'<p>High brand equity cho phép: định giá premium, giảm CAC (khách hàng tìm đến thương hiệu), tăng khả năng mở rộng sang sản phẩm mới, và tạo buffer khi có khủng hoảng. Brand là moat khó nhất để xây nhưng cũng khó nhất để phá.</p>',
+    example:'Coca-Cola nếu đổi tên thành XYZ sẽ mất hàng trăm tỷ USD giá trị. Mù mắt test: nhiều người thích vị Pepsi hơn, nhưng khi biết nhãn thì chọn Coca-Cola. Đây là sức mạnh của brand equity — override cả cảm giác vị giác thực tế.'},
+
+  {id:37,cat:'marketing',name:'Go-to-Market Strategy',short:'Kế hoạch đưa sản phẩm ra thị trường và tiếp cận khách hàng mục tiêu.',
+    def:'<p>GTM Strategy là kế hoạch toàn diện về cách doanh nghiệp sẽ tiếp cận và chiếm lĩnh một thị trường, bao gồm: định nghĩa ICP (Ideal Customer Profile), lựa chọn kênh phân phối, pricing, messaging, motion (sales-led hay product-led), và launch plan.</p>',
+    why:'<p>Sản phẩm tốt với GTM kém vẫn thất bại. GTM tốt với sản phẩm trung bình đôi khi thắng. Distribution là lợi thế cạnh tranh thực sự trong hầu hết ngành — "distribution eats product for breakfast."</p>',
+    example:'Palantir GTM: không bán qua sales thông thường mà "embed" engineer vào client site trong 6-12 tháng để chứng minh giá trị — forward deployed engineer model. Chi phí cao nhưng tỷ lệ chuyển đổi từ pilot sang contract dài hạn rất cao.'},
+
+  {id:38,cat:'marketing',name:'Network Effects',short:'Giá trị sản phẩm tăng theo số lượng người dùng — moat mạnh nhất của digital age.',
+    def:'<p>Network Effect (Metcalfe\'s Law) xảy ra khi giá trị sản phẩm tăng lên khi có thêm người dùng. Hai loại: <strong>Direct network effects</strong> (người dùng tương tác trực tiếp với nhau — điện thoại, messaging apps), <strong>Indirect/cross-side</strong> (hai nhóm users khác nhau — Uber: drivers + riders, marketplace: buyers + sellers).</p>',
+    why:'<p>Network effects là moat mạnh nhất của kỷ nguyên số — một khi đạt critical mass, cực kỳ khó cho đối thủ bắt kịp. Đây là lý do "winner-take-all" phổ biến trong digital markets. Tuy nhiên, network effects cũng có thể đảo chiều (reversibility) khi có breakout platform mới.</p>',
+    example:'LinkedIn: 950M+ professionals. Giá trị cho recruiter tăng vì nhiều candidates. Giá trị cho professional tăng vì nhiều recruiters. Self-reinforcing loop đã 20 năm — cực kỳ khó để disrupt vì cần relocate toàn bộ mạng lưới professional.'},
+
+  {id:39,cat:'marketing',name:'Jobs To Be Done',short:'Khách hàng không mua sản phẩm — họ "thuê" sản phẩm để hoàn thành một công việc.',
+    def:'<p>Clayton Christensen: Framework JTBD tập trung vào <em>tại sao</em> khách hàng mua thứ gì đó, không phải họ là ai. Mỗi sản phẩm được "thuê" để hoàn thành một "job" — functional (tiết kiệm thời gian), social (thể hiện địa vị), emotional (cảm thấy tốt hơn).</p><p>Câu hỏi cốt lõi: "Khi khách hàng mua sản phẩm này, họ đang cố hoàn thành công việc gì?"</p>',
+    why:'<p>JTBD mở ra cạnh tranh thực sự và cơ hội đổi mới. Milkshake example: McDonald\'s nhận ra người mua milkshake buổi sáng đang "thuê" nó để làm người bạn đồng hành trong commute dài — không phải để thỏa mãn cơn thèm ngọt. Insight này thay đổi hoàn toàn cách cải thiện sản phẩm.</p>',
+    example:'IKEA JTBD: khách không mua đồ nội thất, họ "thuê" IKEA để cảm thấy nhà mình đẹp và thể hiện bản sắc cá nhân với giá vừa phải. Khi hiểu job này, IKEA thiết kế showroom như căn phòng thật, không phải kệ trưng bày — tăng conversion đáng kể.'},
+
+  // ─── OPERATIONS (12) ───
+  {id:40,cat:'operations',name:'Supply Chain Management',short:'Quản lý toàn bộ dòng chảy nguyên liệu, thông tin và tiền từ nhà cung cấp đến khách hàng.',
+    def:'<p>SCM điều phối dòng chảy của <strong>vật chất</strong> (nguyên liệu → sản phẩm → delivery), <strong>thông tin</strong> (đơn hàng, dự báo, tracking), và <strong>tài chính</strong> (thanh toán, credit) qua toàn bộ mạng lưới từ nhà cung cấp đến end customer.</p><p>Bao gồm: procurement, manufacturing, warehousing, distribution, reverse logistics.</p>',
+    why:'<p>Supply chain là nguồn lợi thế cạnh tranh lớn (Amazon, Zara, Toyota) hoặc nguồn rủi ro thảm họa (COVID-19 làm lộ rõ supply chains mỏng manh của nhiều ngành). Resilient supply chain = competitive moat.</p>',
+    example:'Toyota Production System và Just-in-Time (JIT): zero inventory, deliver exactly when needed. COVID-19: JIT bộc lộ điểm yếu khi supply chain bị disrupted — nhiều nhà máy dừng vì thiếu một linh kiện nhỏ. Bài học: balance efficiency với resilience.'},
+
+  {id:41,cat:'operations',name:'Lean Manufacturing',short:'Loại bỏ mọi lãng phí trong quy trình sản xuất để tạo ra nhiều giá trị hơn.',
+    def:'<p>Lean (Toyota Production System) tập trung loại bỏ 7 loại <strong>muda</strong> (lãng phí): Overproduction, Waiting, Transportation, Over-processing, Inventory, Motion, Defects. Nguyên tắc: chỉ làm những gì khách hàng cần, khi cần, với lượng cần thiết.</p><p>Công cụ: 5S, Kanban, Kaizen, Value Stream Mapping, Poka-yoke (error-proofing).</p>',
+    why:'<p>Lean không chỉ áp dụng cho manufacturing mà cho mọi quy trình: software development (Agile/Scrum dựa trên Lean), hospital operations, restaurant chains. Tư duy Lean giúp thấy và loại bỏ friction trong bất kỳ hệ thống nào.</p>',
+    example:'Toyota: với cùng nguồn lực, sản xuất được nhiều xe hơn, chất lượng tốt hơn và thời gian lead time ngắn hơn Detroit Big Three. Lean thinking lan ra toàn bộ business world sau "The Machine That Changed The World" (1990).'},
+
+  {id:42,cat:'operations',name:'Key Performance Indicators (KPIs)',short:'Chỉ số đo lường tiến độ đạt mục tiêu chiến lược và vận hành.',
+    def:'<p>KPI là chỉ số đo lường có thể định lượng để đánh giá hiệu quả hoạt động trong việc đạt mục tiêu. Phân loại: <strong>Leading indicators</strong> (dự báo kết quả tương lai — number of proposals sent), <strong>Lagging indicators</strong> (đo lường kết quả đã xảy ra — revenue). <strong>North Star Metric</strong>: một KPI duy nhất phản ánh giá trị cốt lõi tạo ra cho khách hàng.</p>',
+    why:'<p>"What gets measured gets managed." Nhưng đo sai thứ còn nguy hiểm hơn không đo. Goodhart\'s Law: "When a measure becomes a target, it ceases to be a good measure." Chọn KPI phản ánh giá trị thực, không KPI dễ đạt nhưng không có ý nghĩa.</p>',
+    example:'Airbnb North Star Metric: "nights booked" — tăng nights booked = platform mang lại giá trị cho cả host lẫn guest. Facebook: "daily active users." Spotify: "time spent listening." Mỗi team align tất cả efforts với North Star.'},
+
+  {id:43,cat:'operations',name:'OKRs (Objectives & Key Results)',short:'Framework thiết lập mục tiêu tham vọng và theo dõi kết quả cụ thể.',
+    formula:'Objective (What) + 3-5 Key Results (How measured) = OKR',
+    def:'<p>OKRs được Andy Grove phát triển tại Intel, sau đó được John Doerr đem đến Google năm 1999. <strong>Objective</strong>: mục tiêu định tính, tham vọng, inspiring. <strong>Key Results</strong>: chỉ số định lượng, thời hạn rõ ràng, đo được mức độ đạt Objective.</p><p>OKR 60-70% achievement được coi là tốt — nếu 100% thường là không đủ tham vọng.</p>',
+    why:'<p>OKRs giải quyết vấn đề alignment — đảm bảo mọi team đều đẩy về cùng hướng. Transparency: mọi người đều thấy OKR của nhau → giảm siloed thinking. Trong tổ chức lớn, thiếu alignment là nguyên nhân lớn nhất của inefficiency.</p>',
+    example:'Google áp dụng OKRs từ 1999, khi còn 40 người. Sundar Pichai vẫn viết OKRs và chia sẻ với toàn công ty. Culture of ambition và accountability được built in — mỗi Googler biết mình đóng góp thế nào vào mục tiêu lớn hơn.'},
+
+  {id:44,cat:'operations',name:'Process Improvement & Six Sigma',short:'Giảm thiểu lỗi và biến động trong quy trình xuống mức gần hoàn hảo.',
+    formula:'DMAIC: Define → Measure → Analyze → Improve → Control',
+    def:'<p>Six Sigma là phương pháp cải tiến quy trình với mục tiêu đạt <strong>3.4 lỗi trên 1 triệu cơ hội</strong> (sigma level 6). Sử dụng dữ liệu thống kê để xác định và loại bỏ nguyên nhân gốc rễ của biến động và lỗi. Kết hợp với Lean thành Lean Six Sigma.</p>',
+    why:'<p>Trong manufacturing, medical devices, aviation, tài chính — lỗi nhỏ có thể gây hậu quả thảm khốc. Six Sigma disciplines tư duy dựa trên dữ liệu, root cause analysis và process ownership rõ ràng.</p>',
+    example:'GE dưới Jack Welch áp dụng Six Sigma 1995: tiết kiệm 10+ tỷ USD trong 5 năm đầu. Motorola (inventor): từ chất lượng trung bình năm 1980 → world-class manufacturer → winning Malcolm Baldrige Award 1988.'},
+
+  {id:45,cat:'operations',name:'Economies of Scale',short:'Chi phí trung bình giảm khi sản lượng tăng — lợi thế tự nhiên của quy mô lớn.',
+    def:'<p>Economies of Scale xảy ra khi <strong>chi phí cố định phân bổ trên nhiều đơn vị hơn</strong>, chi phí biến đổi giảm theo quy mô (bulk purchasing, learning curve), và hiệu quả chuyên môn hóa tăng. Ngược lại, Diseconomies of Scale xảy ra khi tổ chức quá lớn → bureaucracy, coordination costs tăng.</p>',
+    why:'<p>Economies of scale là lý do tại sao incumbent lớn có lợi thế chi phí tự nhiên — Amazon, Walmart có thể bán rẻ hơn vì spread fixed costs. Startup cần đạt scale đủ nhanh để tận dụng hoặc tìm cách compete với differentiation thay vì cost.</p>',
+    example:'Walmart: từng warehouse phân phối phục vụ hàng trăm store → chi phí logistics/unit rất thấp. Mua bulk từ suppliers → giá tốt hơn bất kỳ đối thủ nhỏ nào. Scale tạo ra cost moat tự gia tăng — càng lớn càng rẻ.'},
+
+  {id:46,cat:'operations',name:'Outsourcing & Make-or-Buy',short:'Quyết định sản xuất nội bộ hay mua ngoài dựa trên lợi thế so sánh và chiến lược.',
+    def:'<p>Make-or-Buy Decision phân tích có nên tự làm hay thuê ngoài cho từng hoạt động. <strong>Outsource khi</strong>: không phải core competency, nhà cung cấp có lợi thế quy mô/chuyên môn, chi phí thấp hơn, linh hoạt hơn. <strong>In-house khi</strong>: là core competency, cần kiểm soát chất lượng, IP sensitive, hoặc strategic importance cao.</p>',
+    why:'<p>Outsource quá nhiều làm mất năng lực cốt lõi và tạo dependency nguy hiểm (Boeing 787: outsource quá nhiều, coordination nightmare). Outsource quá ít làm loãng focus và capital. Quyết định đúng phụ thuộc vào strategic importance và total cost of ownership.</p>',
+    example:'Apple: outsource manufacturing (Foxconn) nhưng in-house chip design, software, retail experience — đây là core competencies. Nike: outsource 100% manufacturing, in-house design, marketing, brand — đúng vì manufacturing không phải differentiator của Nike.'},
+
+  {id:47,cat:'operations',name:'Inventory Management',short:'Cân bằng giữa đủ hàng để phục vụ khách hàng và không lãng phí vốn vào tồn kho.',
+    formula:'EOQ = √(2DS/H) · Inventory Turnover = COGS ÷ Average Inventory',
+    def:'<p>Inventory Management cân bằng chi phí giữ hàng (holding costs) và chi phí hết hàng (stockout costs). <strong>EOQ</strong> (Economic Order Quantity) tính lượng đặt hàng tối ưu. <strong>ABC Analysis</strong> phân loại hàng theo giá trị để ưu tiên quản lý. <strong>JIT</strong> (Just-in-Time) giảm tồn kho về gần 0.</p>',
+    why:'<p>Tồn kho quá nhiều: vốn bị đóng băng, chi phí kho, hàng lỗi thời. Tồn kho quá ít: hết hàng, mất doanh thu, khách hàng bỏ đi. COVID-19 chứng minh JIT quá extreme có rủi ro trong supply chain disruption.</p>',
+    example:'Amazon: inventory turnover ~8x/năm (hàng quay vòng 8 lần/năm) vs trung bình retail ~4x. Walmart: 8-9x. Khả năng quay vòng hàng nhanh = less capital tied up + fresher inventory + higher efficiency.'},
+
+  {id:48,cat:'operations',name:'Quality Management',short:'Hệ thống đảm bảo sản phẩm và dịch vụ đáp ứng hoặc vượt kỳ vọng khách hàng.',
+    def:'<p><strong>TQM (Total Quality Management)</strong>: toàn bộ tổ chức chịu trách nhiệm về chất lượng. <strong>ISO 9001</strong>: tiêu chuẩn quốc tế về hệ thống quản lý chất lượng. <strong>PDCA Cycle</strong> (Plan-Do-Check-Act): vòng cải tiến liên tục của Deming. Chất lượng được định nghĩa bởi khách hàng, không phải producer.</p>',
+    why:'<p>"Quality is free" (Philip Crosby): chi phí để làm đúng ngay từ đầu thấp hơn chi phí sửa lỗi, recall, mất khách hàng. Doanh nghiệp có culture of quality thường có chi phí hoạt động thấp hơn và customer retention cao hơn.</p>',
+    example:'Toyota "Andon cord": bất kỳ worker nào cũng có thể dừng toàn bộ dây chuyền khi phát hiện lỗi. Ban đầu tưởng tốn kém, nhưng dừng sớm để fix rẻ hơn gấp nhiều lần so với repair khi xe đã xuất xưởng.'},
+
+  {id:49,cat:'operations',name:'Capacity Planning',short:'Đảm bảo doanh nghiệp có đủ năng lực đáp ứng cầu hiện tại và tương lai.',
+    def:'<p>Capacity Planning xác định sản lượng tối đa (maximum capacity) và sản lượng hiệu quả (effective capacity), sau đó hoạch định đầu tư để đáp ứng cầu dự báo. Bottleneck (cổ chai) là điểm giới hạn capacity của toàn hệ thống — Theory of Constraints (TOC) của Goldratt tập trung vào identify và eliminate bottlenecks.</p>',
+    why:'<p>Over-capacity: chi phí cố định cao nhưng underutilized. Under-capacity: mất doanh thu, khách hàng bỏ đi, service quality sụt giảm. Cloud computing đã giải quyết vấn đề này cho IT: elastic capacity theo nhu cầu.</p>',
+    example:'COVID vaccine manufacturing: capacity planning thất bại thảm hại. Pfizer/BioNTech chỉ sản xuất được vài triệu liều ban đầu vì không ai dự báo cần billions of doses trong 12 tháng. AWS giúp Netflix không bao giờ hết capacity trong peak demand.'},
+
+  {id:50,cat:'operations',name:'Standard Operating Procedures (SOPs)',short:'Hệ thống hóa quy trình để đảm bảo chất lượng nhất quán và có thể nhân rộng.',
+    def:'<p>SOP là tài liệu hóa bước-by-bước các quy trình chuẩn để đảm bảo <strong>nhất quán, chất lượng, và có thể đào tạo</strong>. McDonald\'s nổi tiếng với SOP cho mọi thứ từ nấu khoai tây chiên đến vệ sinh nhà vệ sinh — cho phép scale toàn cầu với chất lượng đồng đều.</p>',
+    why:'<p>Không có SOP, doanh nghiệp phụ thuộc vào cá nhân cụ thể. Khi người đó nghỉ, quy trình sụp đổ. SOPs tốt là nền tảng của scalability, franchise model, và continuous improvement.</p>',
+    example:'Ray Kroc (McDonald\'s): "We\'re not in the food business, we\'re in the systems business." Mỗi franchise hoạt động như clone vì SOP cực kỳ chi tiết. 40,000 locations, 69 triệu customers/ngày — chỉ khả thi nhờ SOP world-class.'},
+
+  {id:51,cat:'operations',name:'Technology & Digital Transformation',short:'Tận dụng công nghệ để nâng cao hiệu quả, tạo ra sản phẩm mới và cạnh tranh trong kỷ nguyên số.',
+    def:'<p>Digital Transformation không chỉ là "dùng phần mềm mới" mà là thay đổi căn bản cách doanh nghiệp tạo ra và phân phối giá trị thông qua công nghệ số. Bao gồm: automation, data analytics, AI/ML, cloud, digital products, và thay đổi culture.</p>',
+    why:'<p>Doanh nghiệp không transform thì bị disrupt. Blockbuster, Kodak, Nokia đều chậm digital transformation — kết quả thảm hại. Nhưng transform không có chiến lược rõ ràng cũng thất bại — nhiều large enterprise đốt hàng tỷ USD vào digital initiatives không có ROI.</p>',
+    example:'DBS Bank Singapore: từ "traditional bank" → "technology company with a banking license." Đầu tư mạnh vào API banking, mobile-first, data analytics. Kết quả: NPS tăng từ 29 → 56, cost-to-income ratio giảm từ 45% → 43%, ROE tăng đáng kể — digital transformation thực sự.'},
+
+  // ─── PEOPLE (12) ───
+  {id:52,cat:'people',name:'Organizational Culture',short:'Tập hợp giá trị, niềm tin và hành vi chung định hình cách một tổ chức hoạt động.',
+    def:'<p>Culture là "cách chúng tôi làm việc ở đây" — bao gồm giá trị tuyên bố (stated values) và giá trị thực tế (lived values). Edgar Schein mô tả 3 tầng: <strong>Artifacts</strong> (thứ nhìn thấy được — office layout, dress code), <strong>Espoused Values</strong> (giá trị tuyên bố), <strong>Underlying Assumptions</strong> (niềm tin sâu xa không được nói ra).</p>',
+    why:'<p>Peter Drucker: "Culture eats strategy for breakfast." Culture tốt attracts talent, drives engagement, accelerates execution. Culture xấu phá hủy chiến lược tốt nhất. Culture không được chủ động định hình sẽ tự hình thành — thường không theo hướng bạn muốn.</p>',
+    example:'Netflix Culture Deck: Patty McCord và Reed Hastings định nghĩa culture Netflix qua "Freedom and Responsibility" — hire adults, pay top of market, give context not directives, keep only highly effective people. Controversial nhưng tạo ra high-performance culture đã scale lên 12,000+ employees.'},
+
+  {id:53,cat:'people',name:'Talent Acquisition & Retention',short:'Thu hút và giữ chân nhân tài — lợi thế cạnh tranh bền vững nhất.',
+    def:'<p>Trong knowledge economy, people là tài sản quan trọng nhất. <strong>Talent Acquisition</strong>: xây dựng employer brand, sourcing, screening, interview process, offer management. <strong>Retention</strong>: compensation, career development, culture, autonomy, manager quality, equity/ownership.</p><p>Cost of turnover: thường 1.5-2x annual salary của nhân viên (recruiting, onboarding, productivity ramp).</p>',
+    why:'<p>Steve Jobs: "One great engineer is worth 50 average engineers." Trong tech đặc biệt đúng. First 10-20 employees định hình DNA của startup. Wrong hire ở C-suite có thể phá hủy cả doanh nghiệp. Tốt hơn để vị trí trống nhiều tháng hơn hire wrong person.</p>',
+    example:'Google: famously rigorous hiring (2% acceptance rate) và creative perks (free food, 20% time, shuttle). Meta: pay top of market + equity để outcompete. Stripe: 2-person "bar raisers" in every interview. Investment in hiring process → consistent quality at scale.'},
+
+  {id:54,cat:'people',name:'Performance Management',short:'Hệ thống đặt mục tiêu, đánh giá và phát triển hiệu suất nhân viên.',
+    def:'<p>Performance Management hiện đại dịch chuyển từ "annual review" sang continuous feedback, regular 1:1s, và real-time performance data. Bao gồm: goal setting (OKRs/MBOs), regular check-ins, developmental feedback, calibration sessions, và compensation decisions.</p><p>Phân biệt <strong>performance management</strong> (đánh giá kết quả) và <strong>performance development</strong> (phát triển năng lực).</p>',
+    why:'<p>Performance management kém: nhân viên giỏi không nhận được recognition → bỏ việc. Nhân viên kém không được feedback rõ ràng → tiếp tục underperform hoặc manager không dám action. Calibration đảm bảo fairness across teams.</p>',
+    example:'Adobe abolishes annual reviews 2012: thay bằng "Check-ins" — ongoing, forward-looking conversations. Result: voluntary attrition giảm 30%, forced-out attrition giảm 50%. Adobe\'s "Check-in" program được nhiều Fortune 500 copy sau đó.'},
+
+  {id:55,cat:'people',name:'Maslow\'s Hierarchy & Employee Motivation',short:'Hiểu nhu cầu con người để tạo môi trường làm việc thúc đẩy hiệu suất cao nhất.',
+    def:'<p>Maslow (1943): 5 tầng nhu cầu — Physiological → Safety → Social → Esteem → Self-actualization. Tầng dưới cần được đáp ứng trước khi tầng trên phát huy. Trong môi trường làm việc: Physiological = lương đủ sống, Safety = job security, Social = belonging/team, Esteem = recognition/autonomy, Self-actualization = growth/meaning.</p><p>Herzberg Two-Factor Theory: Hygiene factors (tránh dissatisfaction) vs Motivators (tạo ra satisfaction thực sự).</p>',
+    why:'<p>Trả lương thấp → nhân viên lo lương → không thể focus vào sáng tạo. Trả lương đủ nhưng thiếu autonomy và meaning → không reach potential. Hiểu đúng motivation tránh "buying" loyalty bằng tiền khi vấn đề thực là meaning và growth.</p>',
+    example:'Daniel Pink "Drive": sau khi baseline compensation đáp ứng, ba motivator chính là Autonomy (kiểm soát công việc của mình), Mastery (học hỏi và phát triển), Purpose (đóng góp cho điều gì lớn hơn). Google 20% time = autonomy + mastery + purpose → Gmail, Google Maps, AdSense.'},
+
+  {id:56,cat:'people',name:'Organizational Structure',short:'Cách tổ chức phân bổ quyền lực, trách nhiệm và dòng thông tin.',
+    def:'<p>Các cấu trúc tổ chức chính: <strong>Functional</strong> (theo chức năng: Marketing, Engineering, Finance), <strong>Divisional</strong> (theo sản phẩm/địa lý/khách hàng), <strong>Matrix</strong> (kết hợp functional + divisional — dual reporting), <strong>Flat/Horizontal</strong> (ít cấp quản lý, nhiều autonomy), <strong>Network/Agile</strong> (cross-functional teams linh hoạt).</p>',
+    why:'<p>"Structure follows strategy" (Chandler) — cấu trúc phải phục vụ chiến lược. Functional tốt cho stability và expertise. Divisional tốt cho speed và customer focus. Matrix tạo ra resource sharing nhưng dễ tạo conflict. Startup nên flat, large enterprise cần structure rõ ràng hơn.</p>',
+    example:'Spotify "Squad Model": teams of 6-8 (squads) tự quản lý như mini-startup. Squads cùng domain → tribe. Cùng function → chapter. Cùng interest → guild. Tận dụng autonomy của startup + scale của enterprise. Được nhiều tech company học theo.'},
+
+  {id:57,cat:'people',name:'Hiring & Firing Decisions',short:'Quyết định quan trọng nhất của leader — ai được vào team và khi nào cần chia tay.',
+    def:'<p>Brad Smart (TopGrading): hire A-players, coach B-players, remove C-players. Định nghĩa A-player: top 10% talent available for that role at that compensation. <strong>Two-way door test</strong>: có thể reverse quyết định không? Hire có thể fix bằng cách fire, nhưng keeping wrong person too long có chi phí cơ hội lớn.</p>',
+    why:'<p>Wrong hire ở manager level: có thể destroy entire team. Smart people leave bad managers, not bad companies. Khi bạn biết một hire là sai, mỗi ngày delay là mỗi ngày làm tổn hại team, culture và business. "Hire slow, fire fast" — nhưng fire với dignity và clarity.</p>',
+    example:'Ray Dalio (Bridgewater): "It\'s not cruel to be direct about poor performance — it\'s more compassionate than false hope." Radical transparency về performance expectations và honest feedback culture → consistently top-performing hedge fund 40+ years.'},
+
+  {id:58,cat:'people',name:'Change Management',short:'Dẫn dắt con người và tổ chức qua quá trình thay đổi hiệu quả.',
+    def:'<p>Kotter\'s 8-Step Model: (1) Create urgency, (2) Form powerful coalition, (3) Create vision, (4) Communicate vision, (5) Empower action, (6) Create short-term wins, (7) Consolidate gains, (8) Anchor in culture. Kübler-Ross Change Curve: Shock → Denial → Anger → Bargaining → Depression → Testing → Acceptance.</p>',
+    why:'<p>70% of change initiatives fail (McKinsey) — mostly due to people issues, not technical issues. Change is uncomfortable; people resist. Understanding psychology of change và investing in change management là difference between transformation success and expensive failure.</p>',
+    example:'IBM nhiều lần transformation: từ hardware → services (Lou Gerstner, 1993) và từ services → cloud/AI (2010s). Gerstner không bắt đầu với grand vision mà với "stop bleeding, win customers back, grow" — achievable milestones xây dựng momentum và trust trước khi tackle cultural transformation.'},
+
+  {id:59,cat:'people',name:'Compensation & Total Rewards',short:'Hệ thống đãi ngộ toàn diện để thu hút, động viên và giữ chân nhân tài.',
+    def:'<p>Total Rewards = <strong>Base Salary</strong> + <strong>Variable Pay</strong> (bonus, commission) + <strong>Equity</strong> (stock options, RSUs) + <strong>Benefits</strong> (health, retirement) + <strong>Non-monetary</strong> (flexibility, culture, growth). Equity đặc biệt quan trọng để align long-term interest nhân viên với công ty.</p>',
+    why:'<p>Pay too low → can\'t attract/retain talent. Pay too high → burn cash, create entitlement. Tốt hơn là pay top of market cho A-players và maintain high bar cho everyone else. Equity làm cho mọi người cảm thấy là owner, không chỉ là employee — thay đổi hoàn toàn engagement level.</p>',
+    example:'Spotify: transparent salary bands, benchmarked to top of market, no negotiation. Mọi người biết mình được trả fair so với peers. Kết quả: giảm negotiation overhead, tăng perceived fairness, ít turnover hơn competitors.'},
+
+  {id:60,cat:'people',name:'DEI & Inclusive Leadership',short:'Đa dạng, Bình đẳng và Hòa nhập như lợi thế kinh doanh và trách nhiệm đạo đức.',
+    def:'<p><strong>Diversity</strong>: sự đa dạng về demographics, experience, perspective. <strong>Equity</strong>: cơ hội bình đẳng dựa trên nhu cầu, không phải equal treatment. <strong>Inclusion</strong>: môi trường mọi người cảm thấy belong và có thể đóng góp hết mình. McKinsey: diverse teams outperform homogeneous teams 35% (2015, 2018, 2020 studies).</p>',
+    why:'<p>Homogeneous teams có groupthink — bỏ qua blind spots và risk. Diverse teams phát hiện được nhiều solutions hơn và hiểu được diverse customer bases tốt hơn. Thực tế: nhiều fintech, health tech sản phẩm kém vì team toàn đồng nhất không nhận ra bias trong product design.</p>',
+    example:'Google Project Aristotle: team effectiveness phụ thuộc ít vào ai trong team, nhiều vào <em>dynamic</em> giữa members. Số 1 predictor: psychological safety — mọi người có thể speak up mà không sợ bị chế giễu. DEI tạo ra diverse perspectives + psychological safety = better decisions.'},
+
+  {id:61,cat:'people',name:'Remote Work & Distributed Teams',short:'Vận hành teams hiệu quả khi không ở cùng một địa điểm vật lý.',
+    def:'<p>Remote work yêu cầu thay đổi về process (documentation-heavy, async-first), tools (Slack, Notion, Loom, Figma), culture (trust over surveillance, outcome over hours), và management (1:1s quan trọng hơn, explicit rather than osmosis communication).</p><p>Async communication: không phải trả lời ngay lập tức nhưng phải respond within reasonable window.</p>',
+    why:'<p>COVID-19 forced experiment toàn cầu → remote work viable cho knowledge work. Lợi ích: talent pool toàn cầu, cost reduction, employee flexibility. Thách thức: collaboration quality, culture building, onboarding, serendipitous innovation.</p>',
+    example:'GitLab: 1,500+ employees, 65+ countries, 100% remote. "All Remote" handbook 3,000+ pages documenting every process. Mọi thứ written down, async-first, no required synchronous meetings. IPO 2021, market cap $11B. Chứng minh extreme remote work possible at scale.'},
+
+  {id:62,cat:'people',name:'Succession Planning',short:'Chuẩn bị thế hệ lãnh đạo kế tiếp để đảm bảo sự liên tục và bền vững của tổ chức.',
+    def:'<p>Succession Planning là quy trình chủ động xác định và phát triển những người có tiềm năng lấp đầy các vị trí lãnh đạo quan trọng trong tương lai. Bao gồm: talent pipeline mapping, development programs cho high-potentials, và contingency planning cho key man risk.</p>',
+    why:'<p>Key man risk: nếu CEO nghỉ đột ngột, doanh nghiệp có thể sụp đổ. Steve Jobs passing (2011): Apple đã chuẩn bị Tim Cook từ nhiều năm. Steve Ballmer rời Microsoft: Satya Nadella đã ở đó, sẵn sàng. Succession planning = business continuity.</p>',
+    example:'GE dưới Jack Welch: nổi tiếng với talent management pipeline. Welch dành 30% thời gian cho people decisions. Năm 2001 khi Welch retire, GE có 3 candidates sẵn sàng. Kết quả: transition mượt mà, Jeff Immelt tiếp quản thành công.'},
+
+  // ─── PRODUCT (12) ───
+  {id:63,cat:'product',name:'Product Development Lifecycle',short:'Từ ý tưởng đến tay người dùng — quy trình phát triển sản phẩm có hệ thống.',
+    def:'<p>PDLC gồm các giai đoạn: <strong>Discovery</strong> (research, problem validation), <strong>Definition</strong> (specs, requirements, roadmap), <strong>Design</strong> (UX/UI, prototyping), <strong>Development</strong> (engineering), <strong>Testing</strong> (QA, UAT), <strong>Launch</strong>, <strong>Growth</strong> (iteration dựa trên data), <strong>Maturity/Decline</strong>.</p><p>Agile / Scrum chia development thành sprints 2 tuần với continuous delivery thay vì waterfall một lần lớn.</p>',
+    why:'<p>Structured process giảm rework, miscommunication và late surprises. Discovery trước development đặc biệt quan trọng — "build things users actually want" bằng cách validate assumptions trước khi đầu tư engineering time.</p>',
+    example:'Amazon Working Backwards: bắt đầu bằng viết press release và FAQ cho product như thể đã launch — trước khi viết một dòng code. Nếu bạn không thể articulate value proposition rõ ràng trong press release, đó là tín hiệu cần đi deeper vào discovery.'},
+
+  {id:64,cat:'product',name:'MVP (Minimum Viable Product)',short:'Phiên bản đơn giản nhất có thể test hypothesis quan trọng nhất với ít effort nhất.',
+    def:'<p>Eric Ries (Lean Startup): MVP không phải sản phẩm tối thiểu — mà là "<strong>phiên bản tối thiểu của thứ có thể học được nhiều nhất về customers với ít công sức nhất</strong>." MVP test hypothesis cốt lõi: liệu người ta có muốn sản phẩm này không?</p><p>Các loại MVP: Landing page, Concierge (manual fulfillment), Wizard of Oz, Prototype, Single feature.</p>',
+    why:'<p>Amazon thống kê: 90% product ideas sai (không được thị trường adopt). MVP giúp fail fast, learn cheap. Thay vì 18 tháng build full product rồi discover nobody wants it, test trong 2 tuần với MVP và iterate dựa trên real data.</p>',
+    example:'Zappos MVP: Nick Swinmurn không build warehouse. Chụp ảnh giày ở store địa phương, post lên website. Khi ai order, ra store mua rồi ship. Manual, unscalable, nhưng chứng minh: "people will buy shoes online." Sau đó mới build infrastructure.'},
+
+  {id:65,cat:'product',name:'Design Thinking',short:'Quy trình sáng tạo lấy con người làm trung tâm để giải quyết vấn đề phức tạp.',
+    formula:'Empathize → Define → Ideate → Prototype → Test → Iterate',
+    def:'<p>Design Thinking (IDEO / Stanford d.school) là approach giải quyết vấn đề bắt đầu bằng <strong>deep empathy với người dùng</strong>, định nghĩa vấn đề thực sự, brainstorm rộng, prototype nhanh và test liên tục. Không phải chỉ về visual design — là mindset và process.</p>',
+    why:'<p>Hầu hết product failures bắt nguồn từ solving wrong problem. Design thinking đầu tư vào Empathize + Define phase — đảm bảo bạn đang giải quyết real problem của real users trước khi đầu tư vào solution. "Fall in love with the problem, not the solution."</p>',
+    example:'IDEO redesign hospital gurney: thay vì hỏi "làm sao cải thiện gurney?", họ trải nghiệm hospital từ góc nhìn bệnh nhân nằm xuống. Discover: trải nghiệm đáng sợ nhất là nhìn thấy ceiling và lights di chuyển. Solution: cải thiện ceiling tiles và lighting, không phải gurney. Classic design thinking insight.'},
+
+  {id:66,cat:'product',name:'Product-Led Growth (PLG)',short:'Sản phẩm là engine chính của acquisition, expansion và retention.',
+    def:'<p>PLG là strategy trong đó product tự drive growth thay vì sales hay marketing. Người dùng có thể sign up, onboard và achieve value một cách self-serve mà không cần human intervention. Viral mechanics được baked vào sản phẩm.</p><p>Freemium là common PLG model: free tier tạo ra user base rộng, convert power users lên paid.</p>',
+    why:'<p>PLG creates flywheel: tốt hơn product → nhiều users → more data/feedback → product càng tốt hơn. CAC thấp hơn (no sales), faster time to value, higher NPS. Slack, Figma, Zoom, Dropbox, Canva đều PLG companies — trở thành billion-dollar companies với sales team nhỏ.</p>',
+    example:'Figma: design tool, miễn phí cho cá nhân. Designer dùng → invite teammates collaborate → teammates dùng → share với stakeholders → stakeholders dùng → công ty phải mua enterprise license. Toàn bộ growth từ product virality, không cần ads. Adobe mua lại với giá 20 tỷ USD.'},
+
+  {id:67,cat:'product',name:'User Experience (UX) Design',short:'Thiết kế trải nghiệm người dùng để sản phẩm vừa dễ dùng vừa mang lại niềm vui.',
+    def:'<p>UX Design bao gồm research để hiểu user needs và behaviors, information architecture, interaction design, usability testing, và visual design (UI). Mục tiêu: sản phẩm đạt được <strong>usability</strong> (dễ học, dễ dùng, ít lỗi), <strong>utility</strong> (làm được thứ cần làm), và <strong>desirability</strong> (người dùng muốn dùng).</p>',
+    why:'<p>Apple đã chứng minh: great UX = competitive advantage = premium pricing power. Poor UX = high support cost, churn, negative word-of-mouth. Hick\'s Law: càng nhiều lựa chọn → càng khó quyết định. Great UX reduces cognitive load, tạo ra flow state trong product.</p>',
+    example:'Apple iPhone (2007): Nokia phones có nhiều features hơn nhưng UX terrible. Steve Jobs focused laser-sharp trên UX — multi-touch, no stylus, single button, intuitive gestures. UX superiority → entire smartphone market shift. 17 năm sau, still premium UX.'},
+
+  {id:68,cat:'product',name:'Roadmap & Prioritization',short:'Quyết định build gì, theo thứ tự nào, với nguồn lực hạn chế.',
+    def:'<p>Product Roadmap là kế hoạch theo thời gian của features/initiatives theo mục tiêu chiến lược. Frameworks prioritization phổ biến: <strong>RICE</strong> (Reach × Impact × Confidence ÷ Effort), <strong>ICE</strong> (Impact × Confidence × Ease), <strong>MoSCoW</strong> (Must/Should/Could/Won\'t have), <strong>Kano Model</strong> (basic, performance, delight features).</p>',
+    why:'<p>Tài nguyên có hạn, ideas vô hạn. Product managers nói "no" nhiều hơn "yes" — không phải vì không muốn build, mà vì saying yes to everything = saying yes to nothing. Great prioritization là superpower của great PMs.</p>',
+    example:'Amazon Alexa team: hàng nghìn features requested. Team dùng framework "customer backwards" — bắt đầu từ customer outcome muốn achieve, prioritize features đóng góp nhiều nhất vào outcome đó. Kết quả: focus tránh feature bloat.'},
+
+  {id:69,cat:'product',name:'A/B Testing & Experimentation',short:'Ra quyết định dựa trên dữ liệu bằng cách thử nghiệm có kiểm soát.',
+    def:'<p>A/B Testing (hoặc randomized controlled experiment) chia người dùng ngẫu nhiên vào nhóm A (control) và B (variant), đo metric khác nhau có ý nghĩa thống kê hay không. Cho phép ra quyết định dựa trên data, không dựa trên ý kiến hay HiPPO (Highest Paid Person\'s Opinion).</p>',
+    why:'<p>Intuition thường sai. Google chạy 10,000+ experiments/năm. Booking.com chạy 1,000+ tests đồng thời. Facebook: culture "nothing is true until tested." A/B testing democratizes decision making — data beats seniority.</p>',
+    example:'Obama 2008 campaign: A/B test email subject lines, images, CTAs. "Are you in?" beat default by 40%. "Join us" và nhiều variants khác đều tested. Total impact: $60M additional fundraising. Câu chuyện nổi tiếng nhất về ROI của A/B testing.'},
+
+  {id:70,cat:'product',name:'Technical Debt',short:'Chi phí ẩn của shortcuts trong code làm chậm development tương lai.',
+    def:'<p>Ward Cunningham coined "technical debt": code written quickly với shortcuts hoặc suboptimal solutions để deliver faster, nhưng tạo ra "interest payments" — future development chậm hơn, bugs nhiều hơn, harder to change. Như financial debt: có thể strategic (intentional shortcuts với plan to refactor) hoặc reckless (không biết về best practices).</p>',
+    why:'<p>Tech debt không được addressed compound theo thời gian — velocity giảm dần, bugs tăng, engineer frustration tăng → turnover. Legacy systems với massive tech debt làm nhiều large companies không thể innovate nhanh. Phải cân bằng delivery speed với sustainable code quality.</p>',
+    example:'Twitter "Fail Whale" era 2008-2009: scalability issues vì early architecture shortcuts. System down hàng giờ mỗi ngày. Phải rebuild toàn bộ infrastructure từ Monorail → services. Mất 2 năm để ổn định. Tech debt trả giá thực khi scale.'},
+
+  {id:71,cat:'product',name:'Platform vs Product',short:'Hai mô hình kinh doanh khác nhau căn bản — platform orchestrate ecosystems, product delivers specific value.',
+    def:'<p><strong>Product</strong>: tạo ra và cung cấp giá trị trực tiếp cho users (linear value chain). <strong>Platform</strong>: tạo ra infrastructure cho producers và consumers tương tác, tạo ra network effects (multi-sided marketplace). Platform không cần tự tạo ra content/products — orchestrate ecosystem.</p>',
+    why:'<p>Platform business model có economics vượt trội: marginal cost gần 0 khi scale, network effects tạo moat, high gross margins. Nhưng platform cần reach critical mass trước khi có giá trị (chicken-and-egg problem). Doanh nghiệp phải quyết định: product company hay platform company?</p>',
+    example:'iPhone là product. App Store là platform. Apple khôn ngoan: iPhone tạo ra ecosystem của users → App Store enable developers (supply) + users (demand) tương tác → Apple lấy 30% cut của mọi transaction mà không tạo ra app nào. Platform economics.'},
+
+  {id:72,cat:'product',name:'Product Analytics',short:'Đo lường hành vi người dùng để hiểu product performance và ra quyết định.',
+    def:'<p>Product Analytics track và phân tích cách người dùng interact với sản phẩm. Key metrics: <strong>DAU/MAU</strong> (daily/monthly active users), <strong>Retention curves</strong>, <strong>Funnel conversion rates</strong>, <strong>Feature adoption</strong>, <strong>Session length</strong>. Tools: Mixpanel, Amplitude, Google Analytics, FullStory.</p>',
+    why:'<p>"Without data, you\'re just another person with an opinion" (W. Edwards Deming). Product decisions dựa trên data consistently outperform intuition. Analytics tạo ra feedback loop: ship → measure → learn → iterate. Tốt hơn là make small bets often, learn fast, than big bets rarely.</p>',
+    example:'Spotify Discover Weekly: built entirely on user data (listening history, skip rate, save rate). Machine learning personalize playlist 30 songs mỗi thứ Hai. 80M+ listeners mỗi tuần. Product feature hoàn toàn data-driven, zero editorial curation. Classic product analytics done right.'},
+
+  {id:73,cat:'product',name:'SaaS Metrics',short:'Chỉ số đặc thù cho mô hình kinh doanh subscription software.',
+    formula:'ARR · MRR · NRR · Churn · CAC Payback · Rule of 40',
+    def:'<p>SaaS-specific metrics: <strong>ARR</strong> (Annual Recurring Revenue), <strong>MRR</strong> (Monthly RR), <strong>Net Revenue Retention (NRR)</strong> — % revenue retained + expansion từ cohort existing customers (>100% = net expansion), <strong>Gross Churn</strong> (% customers lost), <strong>CAC Payback Period</strong>, <strong>Rule of 40</strong> (growth rate + profit margin ≥ 40%).</p>',
+    why:'<p>SaaS economics khác hoàn toàn transactional businesses. NRR >120% = "land and expand" works. Churn <2%/month = healthy. ARR là currency của SaaS valuation — investor trả multiple on ARR. Hiểu SaaS metrics là điều kiện bắt buộc để build hoặc invest vào SaaS company.</p>',
+    example:'Snowflake IPO 2020 tại 120x ARR multiple: NRR 158% (customers spending 58% nhiều hơn năm trước), net churn âm, ARR growing 100%+ YoY. Combination của high growth + elite NRR + market leadership trong cloud data = highest valuation multiple trong lịch sử software IPO.'},
+
+  {id:74,cat:'product',name:'Innovation Frameworks',short:'Cách tiếp cận có hệ thống để đổi mới liên tục và bền vững.',
+    def:'<p><strong>Horizon Model</strong> (McKinsey): H1 (core business, incremental improvement), H2 (adjacent opportunities, 20-30% resources), H3 (transformational bets, 10% resources). <strong>Jobs to Be Done</strong>: innovate around underserved jobs. <strong>Open Innovation</strong>: source ideas từ external ecosystem. <strong>Ambidextrous Organization</strong>: exploit hiện tại + explore tương lai đồng thời.</p>',
+    why:'<p>Innovate chỉ ở H1 → bị disrupt. Focus toàn bộ vào H3 → starve core business. Balance portfolio theo horizon model đảm bảo doanh nghiệp survive today while creating tomorrow. Apple: iPhone (H1 mature), Apple Watch (H2), Apple Car/Health (H3).</p>',
+    example:'3M: culture cho phép engineers dùng 15% thời gian cho passion projects (precursor của Google 20%). Post-it Notes được phát minh từ 15% time project. 3M culture of innovation tạo ra 30%+ revenue từ products launched trong 5 năm — bền vững đã 100+ năm.'},
+
+  // ─── SALES (13) ───
+  {id:75,cat:'sales',name:'Sales Funnel & Pipeline Management',short:'Quản lý toàn bộ hành trình từ lead đến closed deal một cách có hệ thống.',
+    def:'<p>Sales Pipeline là tập hợp các deals đang trong progress, phân loại theo stages: Prospect → Qualified → Demo/Discovery → Proposal → Negotiation → Closed Won/Lost. <strong>Pipeline coverage</strong>: cần 3-4x quota trong pipeline để đảm bảo quota completion. CRM (Salesforce, HubSpot) để track và manage.</p>',
+    why:'<p>Không có pipeline visibility, revenue forecasting là guesswork. Pipeline management giúp sales reps focus on deals most likely to close, managers identify coaching opportunities, và leadership make resource allocation decisions.</p>',
+    example:'Salesforce "Command of the Sale": methodology trong đó sales rep phải biết rõ: champion, economic buyer, decision criteria, decision process, identify pain, compete — trước khi xác nhận deal là "qualified." Pipeline sạch beats pipeline to (nhiều unqualified deals ≠ realistic forecast).'},
+
+  {id:76,cat:'sales',name:'Consultative Selling',short:'Bán hàng bằng cách thực sự hiểu và giải quyết vấn đề của khách hàng, không phải push sản phẩm.',
+    def:'<p>Consultative selling dịch chuyển sales từ "product-centric" sang "customer-centric." Sales rep đóng vai trò như <strong>trusted advisor</strong>: discover pain points thực sự qua great questions, understand decision-making process, propose tailored solution, demonstrate ROI, và build long-term relationship.</p><p>SPIN Selling (Neil Rackham): Situation → Problem → Implication → Need-payoff questions.</p>',
+    why:'<p>Trong B2B complex sales, buyers đã research extensively trước khi speak với sales. Push-based selling fails khi buyer is informed. Consultative approach giúp discover needs buyer không biết họ có → "aha moment" → trusted partnership → higher win rate và deal size.</p>',
+    example:'Salesforce reps thường bắt đầu không bằng product demo mà bằng "Help me understand your current process và challenges." Sau khi discover pain points, customize demo để show exactly how Salesforce solves those specific pains. Win rate cao hơn generic demos.'},
+
+  {id:77,cat:'sales',name:'Customer Success',short:'Đảm bảo khách hàng đạt được kết quả mong muốn từ sản phẩm — từ sau-bán-hàng đến partner.',
+    def:'<p>Customer Success (CS) là hàm đảm bảo customers actually achieve their desired outcomes khi dùng sản phẩm. CS proactively engages customers (khác với reactive support), drives adoption, measures health score, identifies expansion opportunities, và prevents churn trước khi xảy ra.</p><p>Customer Health Score: usage patterns, NPS, support ticket frequency, executive engagement.</p>',
+    why:'<p>Trong subscription business, 70-80% revenue đến từ existing customers. Churn 5%/month = mất 46% customers trong một năm. CS role critical để NRR >100%. "Customer success is the new competitive advantage" — differentiates on outcomes, not just features.</p>',
+    example:'Gainsight (pioneer của CS software): Customer Success Manager với portfolio 50-100 accounts, health score algorithm để prioritize attention, quarterly business reviews với key accounts. Khi CSM thấy usage drop, proactively reach out với help resources trước khi customer complain hoặc churn.'},
+
+  {id:78,cat:'sales',name:'Account-Based Marketing (ABM)',short:'Tập trung nguồn lực marketing và sales vào một số ít tài khoản giá trị cao.',
+    def:'<p>ABM là chiến lược B2B trong đó sales và marketing teams phối hợp để target specific high-value accounts thay vì broad outreach. "Treat each account as a market of one." Gồm: identify tier-1 accounts, deep research, personalized content/outreach, multi-stakeholder engagement, coordinate sales + marketing touchpoints.</p>',
+    why:'<p>Enterprise deals có 6-10 stakeholders trong decision process. Generic marketing không reach được all of them. ABM coordinates all touchpoints to build relationship with entire buying committee. Kết quả: higher win rate, shorter cycle, larger deal size — đặc biệt hiệu quả cho enterprise B2B với ACV >$50K.</p>',
+    example:'Demandbase (ABM platform): sales và marketing cùng identify 200 target accounts, create personalized ads cho each company (thấy khi employees browse web), personalized website experience khi IP từ target accounts visit, SDRs sequence triggered by engagement signals. Deal size 3x vs non-ABM approach.'},
+
+  {id:79,cat:'sales',name:'Negotiation Strategy',short:'Đàm phán hiệu quả để đạt thỏa thuận tốt cho cả hai bên.',
+    def:'<p>Harvard Negotiation Project: <strong>BATNA</strong> (Best Alternative To Negotiated Agreement) — điểm mạnh thực sự trong đàm phán. <strong>ZOPA</strong> (Zone of Possible Agreement) — khoảng chấp nhận được của cả hai bên. <strong>Principled Negotiation</strong>: tách people khỏi problem, focus on interests not positions, generate options for mutual gain, use objective criteria.</p>',
+    why:'<p>Đàm phán kém có chi phí rất lớn — không chỉ về giá mà còn về relationship. Zero-sum thinking (tôi thắng, bạn thua) thường tạo ra deal nhỏ hơn cả hai bên có thể đạt được. Expand the pie before dividing it.</p>',
+    example:'Amazon supplier negotiations: nổi tiếng về demanding. Tuy nhiên best-in-class Amazon Vendor Managers dùng principled approach — share data về category growth opportunity, propose joint business plan, negotiate based on economics of both sides. Better outcomes than pure pressure tactics.'},
+
+  {id:80,cat:'sales',name:'Churn Rate & Retention',short:'Tỷ lệ mất khách hàng — kẻ thù thầm lặng của business tăng trưởng.',
+    formula:'Monthly Churn = Customers lost ÷ Customers at start of month · Annual Churn ≈ 1 − (1 − Monthly Churn)^12',
+    def:'<p><strong>Logo Churn</strong>: % customers rời bỏ. <strong>Revenue Churn</strong>: % revenue mất đi. <strong>Gross Churn</strong>: mất từ existing customers. <strong>Net Churn</strong>: sau khi trừ expansion revenue từ existing customers. Net churn âm (negative churn) = revenue tăng từ existing base ngay cả khi mất một số customers.</p>',
+    why:'<p>Leaky bucket: thu 100 customers/tháng, mất 80 → net growth 20/tháng và requires enormous acquisition engine. Fix churn là highest ROI activity trong subscription business. Reduce monthly churn từ 5% xuống 3% tăng customer LTV gấp đôi.</p>',
+    example:'Churn math: bắt đầu 1,000 customers, churn 2%/month. Sau 12 tháng: 785 customers. Churn 5%/month: 540 customers. Churn 10%/month: 282 customers. Same acquisition, very different outcomes. Tập trung giảm churn thường có ROI cao hơn tập trung vào acquisition.'},
+
+  {id:81,cat:'sales',name:'Pricing Models',short:'Các mô hình định giá SaaS và subscription tối ưu cho tăng trưởng.',
+    def:'<p>Các pricing models phổ biến: <strong>Per seat/user</strong> (trả theo số người dùng), <strong>Usage-based</strong> (trả theo consumption — AWS, Twilio), <strong>Tiered</strong> (packages với features khác nhau), <strong>Freemium</strong> (free + paid upgrade), <strong>Value-based</strong> (trả theo outcomes/ROI achieved). Trend: usage-based pricing align cost với value, tạo natural expansion.</p>',
+    why:'<p>Wrong pricing model kills growth. Per seat discourages adoption. Flat fee leaves money on table. Usage-based creates land-and-expand dynamics tự nhiên: customers start small, grow as they get value. Snowflake, AWS, Twilio, Stripe đều usage-based.</p>',
+    example:'Twilio (messaging API): charge per message sent/received. Developer starts free, builds app, if app succeeds → usage scales → Twilio revenue scales automatically without any sales effort. Self-serve PLG + usage-based = perfect alignment giữa customer success và vendor revenue.'},
+
+  {id:82,cat:'sales',name:'Customer Segmentation for Sales',short:'Phân loại khách hàng để optimize sales motion và nguồn lực.',
+    def:'<p>Sales segmentation theo <strong>deal size</strong>: SMB (self-serve, low touch), Mid-Market (inside sales), Enterprise (field sales, long cycle). Mỗi segment cần different motion: SMB cần PLG + self-serve. Enterprise cần champion building, multi-threaded engagement, executive alignment.</p><p>ICP (Ideal Customer Profile): định nghĩa chính xác customer nào có highest success probability và LTV.</p>',
+    why:'<p>Selling Enterprise product với SMB motion = wasted effort. Selling SMB product với Enterprise motion = uneconomical. Right sales motion cho right segment là critical cho unit economics. ICP alignment ensures sales team spending time on accounts most likely to close và succeed.</p>',
+    example:'HubSpot: started với SMB (easy sign up, no demo needed). As product matured, expanded upmarket với Mid-Market và Enterprise motion. Two different sales teams, two different products (starter vs professional/enterprise), two different onboarding experiences — deliberate segmentation strategy.'},
+
+  {id:83,cat:'sales',name:'Revenue Operations (RevOps)',short:'Alignment giữa Marketing, Sales và Customer Success để maximize revenue performance.',
+    def:'<p>RevOps là hàm hợp nhất operations của Marketing (pipeline creation), Sales (pipeline conversion) và Customer Success (expansion + retention) dưới một umbrella để ensure alignment, process consistency, shared metrics, và technology stack optimization. Mục tiêu: revenue predictability và efficiency.</p>',
+    why:'<p>Siloed operations = data inconsistency, finger-pointing between teams, và missed opportunities. "Who owns the customer journey?" — RevOps ensures seamless handoffs và shared accountability. High-growth companies với strong RevOps function outperform peers 20-30% trên revenue efficiency.</p>',
+    example:'HubSpot CRM ecosystem: Marketing (ads, content, SEO tracked in HubSpot), Sales (deals, pipeline, outreach in HubSpot), CS (tickets, NPS, health score in HubSpot) — single source of truth. RevOps team manages tooling, reporting, process design. CEO có real-time view toàn bộ revenue engine.'},
+
+  {id:84,cat:'sales',name:'Sales Compensation Design',short:'Thiết kế cấu trúc lương và hoa hồng để motivate đúng hành vi và kết quả.',
+    def:'<p>Sales comp thường gồm: <strong>Base salary</strong> (ổn định, thu hút talent), <strong>Variable/Commission</strong> (% of closed revenue — align với revenue goal), <strong>Accelerators</strong> (commission rate tăng khi vượt quota), <strong>SPIFs</strong> (bonus đặc biệt cho specific behaviors), <strong>Quota relief</strong>. On-target earnings (OTE) = base + variable khi đạt 100% quota.</p>',
+    why:'<p>Comp plan là communication của priorities. Wrong comp = wrong behaviors. Clawback provisions tránh short-term gaming. Commission on net new ARR (không phải GMV) align với LTV. Over-complex comp plans demotivate. Simple, clear, attainable, và rewarding top performance là principles.</p>',
+    example:'Salesforce comp design: commission trên ARR, accelerator tại 100% và 125%, bonus cho multi-year deals (predict better LTV), claw-back nếu customer churns within 6 tháng. Sales reps có incentive sell đúng customers (not oversell → churn) và push for multi-year commits.'},
+
+  {id:85,cat:'sales',name:'Customer Onboarding',short:'Khoảng thời gian quyết định để khách hàng đạt được Time-to-Value nhanh nhất có thể.',
+    def:'<p>Customer Onboarding là quá trình giúp new customer achieve <strong>first value</strong> từ sản phẩm càng nhanh càng tốt. Good onboarding = high activation rate, faster adoption, lower churn. Bao gồm: welcome sequence, product tutorials, data migration assistance, training, và success milestones.</p><p>Time-to-Value (TTV): thời gian từ khi sign up đến khi customer nhận được meaningful value lần đầu.</p>',
+    why:'<p>If customers don\'t see value quickly, they churn — even before invoice comes. "The first 90 days determine the next 3 years." High onboarding investment có ROI rất cao vì reduce early churn, increase product adoption, và create advocates earlier.</p>',
+    example:'Slack onboarding: detect new workspace → automatically prompt: invite teammates, set up channels, use slash commands — gamified progression. Threshold: teams exchange 2,000+ messages → retention dramatically increases (they\'ve found value). Onboarding designed specifically to get to this threshold.'},
+
+  {id:86,cat:'sales',name:'Net Promoter Score (NPS)',short:'Đo lường loyalty khách hàng và willingness to recommend qua một câu hỏi đơn giản.',
+    formula:'NPS = % Promoters (9-10) − % Detractors (0-6)',
+    def:'<p>NPS (Fred Reichheld, 2003): hỏi "Bạn có sẵn lòng giới thiệu [company] cho bạn bè/đồng nghiệp không? (0-10)." Promoters (9-10), Passives (7-8), Detractors (0-6). NPS = %Promoters − %Detractors. Score từ -100 đến +100. World-class: >50. Good: >30. Needs improvement: 0-30. Problematic: <0.</p>',
+    why:'<p>NPS correlates strongly với revenue growth trong nhiều industries. Promoters drive word-of-mouth (lowest CAC channel). Detractors generate negative WoM (negative CAC — họ actively đuổi potential customers đi). NPS là lagging indicator của customer success và leading indicator của churn/expansion.</p>',
+    example:'Apple NPS ~72 (one of highest in consumer electronics). Amazon ~54. Comcast ~-2 (Internet providers notoriously low). NPS gap explains why Apple commands premium and Amazon drives loyalty, while Comcast faces constant churn pressure and regulatory scrutiny.'},
+
+  {id:87,cat:'sales',name:'Sales Methodology: MEDDIC/MEDDPICC',short:'Framework qualify deals nghiêm ngặt để close enterprise sales hiệu quả.',
+    formula:'Metrics · Economic Buyer · Decision Criteria · Decision Process · Identify Pain · Champion · Competition',
+    def:'<p>MEDDIC (PTC, 1996) là framework qualify enterprise deals: <strong>Metrics</strong> (ROI quantifiable), <strong>Economic Buyer</strong> (người thực sự ký check), <strong>Decision Criteria</strong> (tiêu chí họ dùng), <strong>Decision Process</strong> (steps đến quyết định), <strong>Identify Pain</strong> (compelling event/pain), <strong>Champion</strong> (internal advocate). MEDDPICC thêm Paper Process và Competition.</p>',
+    why:'<p>Enterprise deals phức tạp, cycles dài 6-18 tháng. MEDDIC ensures reps không waste time trên unqualified deals. Reps biết MEDDIC forecast accurately → management trust → better resource allocation. Gartner: top-performing enterprise sales orgs consistently use structured qualification methodologies.</p>',
+    example:'PTC revenue went from $300M → $1B applying MEDDIC. John McMahon (CRO) later brought to BMC, BladeLogic, and many others — all saw similar transformations. MEDDIC now standard trong enterprise SaaS — Salesforce, ServiceNow, Workday reps all trained on it.'},
+
+  // ─── LEADERSHIP (13) ───
+  {id:88,cat:'leadership',name:'Leadership vs Management',short:'Lãnh đạo tạo ra tầm nhìn và dẫn dắt thay đổi; quản lý thực thi và duy trì trật tự.',
+    def:'<p>Warren Bennis: "Managers do things right. Leaders do the right things." Leaders: set vision và direction, inspire and motivate, drive change, develop people, build culture. Managers: plan, organize, staff, control, problem-solve, deliver results. Cả hai đều cần thiết — doanh nghiệp cần great leaders AND great managers.</p>',
+    why:'<p>Over-managed, under-led organizations: lots of activity but wrong direction — executing efficiently toward wrong goal. Over-led, under-managed: inspiring vision but poor execution — great ideas that never ship. Doanh nghiệp thành công balance leadership (why/what) và management (how/who).</p>',
+    example:'Steve Jobs vs Tim Cook tại Apple: Jobs là visionary leader — set product direction, challenge status quo, inspire. Cook là great manager — supply chain mastery, operations excellence, execution. Jobs hiring Cook (1998): "I need someone who can actually run this company\'s operations." Combination = extraordinary results.'},
+
+  {id:89,cat:'leadership',name:'Decision-Making Frameworks',short:'Ra quyết định tốt hơn bằng cách sử dụng frameworks phù hợp với từng loại tình huống.',
+    def:'<p><strong>Cynefin Framework</strong>: Simple (best practice), Complicated (expert judgment), Complex (probe-sense-respond), Chaotic (act-sense-respond). <strong>Jeff Bezos Type 1/Type 2</strong>: Type 1 (irreversible, high stakes → careful) vs Type 2 (reversible → decide fast). <strong>Pre-mortem</strong>: imagine failure, work backwards. <strong>10/10/10</strong>: how will you feel about this decision in 10 minutes, 10 months, 10 years?</p>',
+    why:'<p>Most bad decisions come from applying wrong framework to the situation. Complex systems (markets, organizations) require experimentation, not analysis paralysis. Reversible decisions should be made fast with incomplete info. Irreversible decisions deserve due diligence. Leaders who confuse these two types create both recklessness AND stagnation.</p>',
+    example:'Amazon: Jeff Bezos differentiated Type 1 vs Type 2 decisions explicitly. "Most decisions are Type 2 — if wrong, you can course-correct. We make them with 70% of information we wish we had. Type 1: entering new market, major acquisition — deserve much more deliberation." Này culture giải thích Amazon\'s speed.'},
+
+  {id:90,cat:'leadership',name:'Situational Leadership',short:'Điều chỉnh phong cách lãnh đạo theo mức độ phát triển và cam kết của từng cá nhân.',
+    def:'<p>Hersey & Blanchard: effective leaders adapt style theo "development level" của subordinate. <strong>D1</strong> (low competence, high commitment) → <strong>Directing</strong> (tell, close supervision). <strong>D2</strong> (some competence, low commitment) → <strong>Coaching</strong> (explain why + how). <strong>D3</strong> (high competence, variable commitment) → <strong>Supporting</strong> (empower, encourage). <strong>D4</strong> (high competence, high commitment) → <strong>Delegating</strong> (trust, autonomy).</p>',
+    why:'<p>One-size-fits-all leadership fails. Micromanaging D4 → frustration và quitting. No structure cho D1 → failure và confusion. Adapting style shows emotional intelligence và người lãnh đạo biết prioritize team member development hơn personal comfort zone.</p>',
+    example:'Great engineering manager: new grad hire → Directing phase (daily check-ins, pair programming, detailed specs). 6 months → Coaching (explain architectural decisions, involve in design discussions). 2 years → Supporting (assign lead on projects, remove blockers). Senior → Delegating (set goals, trust execution, provide strategic context only).'},
+
+  {id:91,cat:'leadership',name:'Psychological Safety',short:'Môi trường mà mọi người cảm thấy an toàn khi nói lên ý kiến, thừa nhận lỗi và thử nghiệm.',
+    def:'<p>Amy Edmondson (Harvard): Psychological Safety là niềm tin rằng mình sẽ không bị phạt hay humiliated khi speak up, ask questions, share ideas, hay admit mistakes. Google Project Aristotle: single biggest predictor của team performance là psychological safety — quan trọng hơn cả ai trong team.</p>',
+    why:'<p>Thiếu psychological safety: mọi người không báo cáo problems, không propose risky ideas, không thừa nhận lỗi → group think, hidden failures (NASA Challenger, Columbia), missed innovation. Với PS cao: faster learning, more innovation, better decisions through diverse input.</p>',
+    example:'Pixar "braintrust": regular screenings trong đó mọi người có thể give brutally honest feedback về films đang develop — không có hierarchy, không shoot the messenger. Culture này tạo ra Cars, Finding Nemo, Up, WALL-E. Ed Catmull: "Candor can\'t be separated from psychological safety."'},
+
+  {id:92,cat:'leadership',name:'Strategic Vision & Communication',short:'Tạo ra và truyền đạt tầm nhìn rõ ràng, compelling để align toàn bộ tổ chức.',
+    def:'<p>Great vision = <strong>aspirational</strong> (inspire), <strong>specific</strong> (guide decisions), <strong>time-bound</strong> (create urgency), và <strong>externally oriented</strong> (about customers/world impact). BHAG (Big Hairy Audacious Goal — Jim Collins): 10-30 năm goal đủ bold để transform mindset. Communication: repeat vision constantly, connect daily work to vision, celebrate examples của vision in action.</p>',
+    why:'<p>"If you want to build a ship, don\'t drum up people to collect wood, but teach them to long for the endless immensity of the sea." (Saint-Exupéry) Employees với clear sense of purpose và vision perform dramatically better. Gallup: engaged employees 21% more productive.</p>',
+    example:'SpaceX vision: "Make humanity multi-planetary." Rõ ràng đến mức mọi engineer biết mọi decision — choose rocket design, material, process — phải serve việc make launch cost low enough to colonize Mars. Vision không chỉ inspiring mà còn là decision-making tool hàng ngày.'},
+
+  {id:93,cat:'leadership',name:'Emotional Intelligence (EQ)',short:'Khả năng nhận biết, hiểu và quản lý cảm xúc của bản thân và người khác.',
+    def:'<p>Daniel Goleman: EQ gồm 4 components: <strong>Self-Awareness</strong> (biết cảm xúc của mình), <strong>Self-Management</strong> (kiểm soát cảm xúc và impulsive reactions), <strong>Social Awareness</strong> (empathy, đọc được người khác), <strong>Relationship Management</strong> (influence, inspire, conflict management, teamwork). EQ more predictive of leadership success than IQ.</p>',
+    why:'<p>Leaders với high EQ: better at building relationships, navigating conflict, inspiring teams trong adversity, và making decisions under pressure. Low EQ leaders thường talented but leave toxic environments behind them, driving away talent và creating dysfunction.</p>',
+    example:'Satya Nadella tại Microsoft: famously high EQ. Changed company culture từ "know-it-all" → "learn-it-all." In book "Hit Refresh": cách experience với son bị tàn tật teach him empathy fundamental to leading people. Under Nadella, Microsoft market cap 10x từ 2014-2023 — largely attributed to culture shift driven by EQ.'},
+
+  {id:94,cat:'leadership',name:'Building High-Performance Teams',short:'Tạo ra môi trường và dynamics để team đạt được những kết quả vượt trội.',
+    def:'<p>Patrick Lencioni "5 Dysfunctions": Absence of Trust → Fear of Conflict → Lack of Commitment → Avoidance of Accountability → Inattention to Results. Fix in order từ dưới lên. Google Project Aristotle: top predictors — psychological safety, dependability, structure & clarity, meaning, impact.</p>',
+    why:'<p>High-performance teams không phải tập hợp các cá nhân giỏi nhất mà là về dynamics tốt nhất. 1+1+1 = 10 với great team dynamics; 1+1+1 = 2 với dysfunction. Leader\'s job là create conditions cho team thành công, không phải làm thay.</p>',
+    example:'Navy SEALs Team Room: không rank trong room — warrant officer có thể challenge admiral\'s decision. Psychological safety tối đa trong mission planning. Real-time debriefs sau mỗi mission: what worked, what didn\'t, no blame — just learning. Culture of continuous improvement driven by radical honesty.'},
+
+  {id:95,cat:'leadership',name:'Ethical Leadership & Governance',short:'Lãnh đạo với tính chính trực và xây dựng hệ thống quản trị đảm bảo trách nhiệm giải trình.',
+    def:'<p>Ethical leadership = leading by example, making decisions aligned with stated values, treating stakeholders fairly, transparency about failures, và zero tolerance for ethical violations — even when expensive. Corporate Governance: board oversight, audit committees, internal controls, whistleblower protections, và accountability mechanisms.</p>',
+    why:'<p>Short-term ethical compromises tạo ra long-term catastrophic risks: Enron, Theranos, FTX. Culture of ethics bắt đầu từ top — nếu leaders tolerate small unethical acts, lớn hơn sẽ follow. Reputation loss thường irreversible và far more costly than short-term ethical choice.</p>',
+    example:'Johnson & Johnson Tylenol crisis 1982: 7 người chết do tampered products. J&J CEO James Burke immediately recalled 31 million bottles ($100M+ cost) — trước khi FDA yêu cầu. Prioritized customer safety over short-term profit. Result: Tylenol recovered market share within a year. Textbook ethical leadership.'},
+
+  {id:96,cat:'leadership',name:'Strategic Partnerships & Alliances',short:'Hợp tác chiến lược để tạo ra giá trị không thể đạt được một mình.',
+    def:'<p>Strategic alliances cho phép doanh nghiệp tận dụng strengths của đối tác để đạt goals nhanh hơn với ít resources hơn. Types: <strong>Joint Venture</strong> (new entity), <strong>Licensing</strong> (IP sharing), <strong>Distribution Partnership</strong>, <strong>Technology Integration</strong>, <strong>Co-marketing</strong>. Success factors: aligned incentives, clear governance, defined exit conditions.</p>',
+    why:'<p>No company can build everything. Partnerships accelerate market access, technology capability, và credibility. Apple + IBM (2014): không ai ngờ — result was enterprise mobile apps breakthrough. Spotify + Netflix cross-promotion: reach new audiences với near-zero cost. Right partnerships = asymmetric leverage.</p>',
+    example:'Microsoft-OpenAI: Microsoft invest $13B, OpenAI integrate GPT vào Microsoft 365, Azure. Microsoft không thể build AGI alone. OpenAI cần cloud infrastructure và distribution. Kết quả: Copilot trong Word/Excel/Teams — Microsoft lại thành relevant trong consumer AI. Classic strategic partnership tạo ra value to both.'},
+
+  {id:97,cat:'leadership',name:'Crisis Management',short:'Lãnh đạo tổ chức vượt qua khủng hoảng bảo vệ value và emerge stronger.',
+    def:'<p>Crisis Management gồm 3 phase: <strong>Pre-crisis</strong> (preparation, scenario planning, protocols), <strong>During crisis</strong> (clear communication, rapid response, stabilize operations, protect core), <strong>Post-crisis</strong> (restore, learn, improve). Nguyên tắc: transparency nhanh, own the narrative, communicate early và often, protect most critical stakeholders đầu tiên.</p>',
+    why:'<p>How a company handles crisis often determines long-term reputation more than the crisis itself. J&J Tylenol vs Volkswagen emissions scandal — cùng là crisis nhưng response hoàn toàn khác nhau → outcomes hoàn toàn khác. Leaders bộc lộ character thực sự trong adversity.</p>',
+    example:'Boeing 737 MAX crisis: hai crashes, 346 người chết. Boeing response chậm, defensive, nhiều lần minimize. FAA grounded fleet 20 tháng. $20B+ in costs. Reputational damage still visible years later. Contrast với Tylenol: same industry (safety-critical), opposite response, opposite outcomes.'},
+
+  {id:98,cat:'leadership',name:'Scaling Leadership',short:'Phát triển khả năng lãnh đạo cùng tốc độ tăng trưởng của tổ chức.',
+    def:'<p>What works at 10 người không work ở 100, 1000, hay 10,000. Scaling leadership requires: moving từ "doing" → "delegating" → "delegating delegation." Build leadership pipeline, document decision rights (RACI), build middle management layer, create leadership development programs, và evolve communication cadence theo org size.</p>',
+    why:'<p>Most startup failures as they scale không phải do bad idea hay market — do founder/CEO không scale leadership ability với company. Founder who can\'t delegate suffocates org at 50 people. "The skills that get you here won\'t get you there" (Marshall Goldsmith) — leadership must evolve.</p>',
+    example:'Mark Zuckerberg evolution: 2004 (hacker/builder) → 2008 (hired Sheryl Sandberg to run operations) → 2012 (CEO of public company) → 2020 (CEO of 60,000 người, AI/metaverse strategic pivot). Each phase required dramatically different leadership skills. Explicitly working with executive coaches và leadership advisors throughout.'},
+
+  {id:99,cat:'leadership',name:'Board Management & Investor Relations',short:'Quản lý mối quan hệ với board và investors để dẫn dắt tổ chức hiệu quả.',
+    def:'<p>Board của startup thường gồm founders + lead investors + independent directors. CEO\'s job với board: <strong>reporting</strong> (transparent về cả good và bad), <strong>seeking guidance</strong> (leverage network và experience), <strong>managing expectations</strong> (no surprises), và <strong>cultivating relationship</strong> (trust giữa CEO và board chair). Investor Relations: quarterly updates, cap table management, bridge financing khi cần.</p>',
+    why:'<p>CEO-board relationship là partnership, không phải principal-agent. CEO nên proactively manage board, không reactive. Surprises destroy trust. Board with diverse, experienced members = free advisory board for CEO. IR tốt = lower cost of capital, smoother fundraises, better terms.</p>',
+    example:'Airbnb COVID crisis 2020: Brian Chesky call Board với brutal honesty — "Revenue xuống 80% trong 8 tuần, chúng ta cần lay off 1,900 người." Board fully behind Chesky vì trust được xây dựng qua years of transparency. Chesky led compassionate layoff process (best practices still cited today). Company emerged stronger.'},
+
+  {id:100,cat:'leadership',name:'Purpose-Driven Business',short:'Xây dựng doanh nghiệp với mục đích vượt lên trên lợi nhuận — tạo ra giá trị bền vững cho xã hội và cổ đông.',
+    formula:'Profit = Necessary Condition · Purpose = Sustainable Direction',
+    def:'<p>Larry Fink (BlackRock): "Purpose is not the sole pursuit of profits but the animating force for achieving them." B-Corp movement, ESG (Environmental, Social, Governance), triple bottom line (People, Planet, Profit). Simon Sinek "Start With Why": companies that know WHY họ tồn tại attract customers và employees who believe what they believe.</p>',
+    why:'<p>Millennials và Gen Z prioritize employer purpose. ESG-aligned companies attract better talent, have lower cost of capital, better long-term returns. Beyond external benefits: purpose-driven culture có higher engagement, better decision clarity (purpose becomes filter for every decision), và resilience in adversity.</p>',
+    example:'Patagonia: "We\'re in business to save our home planet." Don\'t buy our jacket unless you need it campaign. 1% of revenue to environmental causes. $10M Black Friday đến environmental groups. Revenue vẫn tăng mạnh. Yvon Chouinard (2022): transferred ownership to environmental trusts. Purpose-driven business at its most radical — profitable AND deeply meaningful.'},
+];
+
+// ─── STATE ─────────────────────────────────────────────────────────────────
+let activeFilter = 'all';
+let searchQuery = '';
+let currentModal = -1;
+let visibleData = [];
+
+// ─── RENDER ─────────────────────────────────────────────────────────────────
+const grid = document.getElementById('grid');
+const emptyState = document.getElementById('emptyState');
+const shownCount = document.getElementById('shownCount');
+
+function getFiltered() {
+  const q = searchQuery.toLowerCase();
+  return DATA.filter(d => {
+    const catMatch = activeFilter === 'all' || d.cat === activeFilter;
+    const searchMatch = !q || d.name.toLowerCase().includes(q) || d.short.toLowerCase().includes(q);
+    return catMatch && searchMatch;
+  });
+}
+
+function render() {
+  visibleData = getFiltered();
+  shownCount.textContent = visibleData.length;
+  grid.innerHTML = '';
+
+  if (visibleData.length === 0) {
+    emptyState.classList.add('show');
+    return;
+  }
+  emptyState.classList.remove('show');
+
+  // Group by category
+  const groups = {};
+  visibleData.forEach(d => {
+    if (!groups[d.cat]) groups[d.cat] = [];
+    groups[d.cat].push(d);
+  });
+
+  const catOrder = ['strategy','finance','marketing','operations','people','product','sales','leadership'];
+  catOrder.forEach(cat => {
+    if (!groups[cat]) return;
+    const catMeta = CATS[cat];
+
+    const divider = document.createElement('div');
+    divider.className = 'chapter-divider';
+    divider.innerHTML = `<span class="cd-num">${getCatNum(cat)}</span><span class="cd-icon">${getCatIcon(cat)}</span><span class="cd-title">${catMeta.label}</span><div class="cd-line"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink4)">${groups[cat].length} khái niệm</span>`;
+    grid.appendChild(divider);
+
+    const subGrid = document.createElement('div');
+    subGrid.className = 'concepts-grid';
+    subGrid.style.padding = '20px 0 0';
+    groups[cat].forEach((d, i) => {
+      const card = document.createElement('div');
+      card.className = 'concept-card';
+      card.style.setProperty('--card-accent', catMeta.dark);
+      card.style.cssText += `--card-accent:${catMeta.dark};`;
+      card.style.animationDelay = `${i * 0.04}s`;
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="card-index">#${String(d.id).padStart(3,'0')}</span>
+          <span class="card-tag" style="background:${catMeta.bg};color:${catMeta.color}">${catMeta.label}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name" style="color:${catMeta.dark}">${d.name}</div>
+          <div class="card-short">${d.short}</div>
+        </div>
+        <div class="card-expand">Xem chi tiết →</div>`;
+      card.style.setProperty('color', catMeta.dark, '');
+      const beforeStyle = document.createElement('style');
+      beforeStyle.textContent = '';
+      card.addEventListener('click', () => openModal(visibleData.indexOf(d)));
+      subGrid.appendChild(card);
+    });
+    grid.appendChild(subGrid);
+  });
+}
+
+function getCatNum(cat) {
+  const nums = {strategy:'01',finance:'02',marketing:'03',operations:'04',people:'05',product:'06',sales:'07',leadership:'08'};
+  return nums[cat] || '00';
+}
+function getCatIcon(cat) {
+  const icons = {strategy:'♟️',finance:'💹',marketing:'📣',operations:'⚙️',people:'👥',product:'🔬',sales:'🤝',leadership:'🎯'};
+  return icons[cat] || '●';
+}
+
+// ─── FILTER ─────────────────────────────────────────────────────────────────
+function filterCat(cat, el) {
+  activeFilter = cat;
+
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.hero-pill').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll(`[data-filter="${cat}"]`).forEach(e => e.classList.add('active'));
+
+  render();
+  document.getElementById('mainContent').scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── SEARCH ──────────────────────────────────────────────────────────────────
+document.getElementById('sbSearch').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  render();
+});
+
+// ─── MODAL ───────────────────────────────────────────────────────────────────
+function openModal(idx) {
+  currentModal = idx;
+  const d = visibleData[idx];
+  const cat = CATS[d.cat];
+
+  document.getElementById('mIndex').textContent = `#${String(d.id).padStart(3,'0')} · ${cat.label}`;
+  document.getElementById('mTagBadge').innerHTML = `<span class="modal-tag-badge" style="background:rgba(255,255,255,.1);color:${cat.bg}">${cat.label.toUpperCase()}</span>`;
+  document.getElementById('mTitle').textContent = d.name;
+  document.getElementById('mDef').innerHTML = d.def;
+  document.getElementById('mWhy').innerHTML = d.why;
+  document.getElementById('mExample').textContent = d.example;
+
+  const fSec = document.getElementById('mFormulaSection');
+  if (d.formula) {
+    document.getElementById('mFormula').textContent = d.formula;
+    fSec.style.display = '';
+  } else {
+    fSec.style.display = 'none';
+  }
+
+  document.getElementById('mPrev').disabled = idx === 0;
+  document.getElementById('mNext').disabled = idx === visibleData.length - 1;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentModal = -1;
+}
+
+function navModal(dir) {
+  const newIdx = currentModal + dir;
+  if (newIdx >= 0 && newIdx < visibleData.length) openModal(newIdx);
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target.id === 'modalOverlay') closeModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  if (document.getElementById('modalOverlay').classList.contains('open')) {
+    if (e.key === 'ArrowRight') navModal(1);
+    if (e.key === 'ArrowLeft') navModal(-1);
+  }
+});
+
+// ─── MOBILE ──────────────────────────────────────────────────────────────────
+document.getElementById('ham').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('mobOverlay').classList.toggle('show');
+});
+document.getElementById('mobOverlay').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('mobOverlay').classList.remove('show');
+});
+
+// ─── CARD ACCENT ─────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {});
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>
